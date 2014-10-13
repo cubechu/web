@@ -1,0 +1,14 @@
+extends ../layout
+block content
+    .container
+        .row
+            form(action="/login", method="post")
+                div
+                    label Username:
+                    input(type="text", name="username")
+                div
+                    label password:
+                    input(type="password", name="password")
+                div
+                    input(type="submit", value="login")
+            a(href="/auth/github") Github Lingin
