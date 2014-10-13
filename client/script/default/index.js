@@ -1,8 +1,8 @@
 require.config({
-    baseUrl: "/js/",
+    baseUrl: "/script/",
     paths: {
-        "jquery": "jquery",
-        "angular": "angular",
+        "jquery": "jquery.min",
+        "angular": "angular.min",
         "app": "default/default"
     },
     shim: {
