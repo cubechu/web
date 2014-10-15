@@ -14,9 +14,6 @@ define(["angular"], function (ng) {
                 method: 'post',
                 url: '/sendMb',
                 data: {
-                    "userId": "00001",
-                    "userName": "云之家",
-                    "avatar": "http://kdweibo.com/space/c/photo/load?id=5158f25e9cba0cac76000002&spec=150",
                     "content": $scope.sendText,
                     "sendTime": Date.now()
                 }
@@ -42,7 +39,7 @@ define(["angular"], function (ng) {
             for (var i = 0; i < $scope.mbList.length; i++) {
                 if ($scope.mbList[i]._id == msg.mbId && $scope.mbList[i].comment) {
                     $scope.mbList[i].comment.unshift(msg);
-                } else {
+                } else if($scope.mbList[i]._id == msg.mbId && !$scope.mbList[i].comment){
                     $scope.mbList[i].comment = [msg];
                 }
             }
@@ -82,9 +79,6 @@ define(["angular"], function (ng) {
                 data: {
                     receiverId: mb.userId,
                     receiverName: mb.userName,
-                    cmtUserId: "00001",
-                    cmtUserName: "云之家",
-                    cmtUserAvatar: "http://kdweibo.com/space/c/photo/load?id=5158f25e9cba0cac76000002&spec=150",
                     content: $scope.sentText,
                     mbId: mb._id,
                     sendTime: Date.now()

@@ -5,9 +5,9 @@ exports.sendMb = function (req, res) {
     res.setHeader('Content-Type', 'application/json;charset=utf-8');
     var modelObj = req.body;
     var _model = new Model.microblog({
-        userId: modelObj.userId,
-        userName: modelObj.userName,
-        avatar: modelObj.avatar,
+        userId: req.session.passport.user.id,
+        userName: req.session.passport.user.username,
+        avatar: req.session.passport.user.avatar ? req.session.passport.user.avatar : JSON.parse(req.session.passport.user._raw).avatar_url,
         content: modelObj.content,
         sendTime: modelObj.sendTime
     });
@@ -34,9 +34,9 @@ exports.sendCmt = function (req, res) {
     var _model = new Model.comments({
         receiverId: modelObj.receiverId,
         receiverName: modelObj.receiverName,
-        cmtUserId: modelObj.cmtUserId,
-        cmtUserName: modelObj.cmtUserName,
-        cmtUserAvatar: modelObj.cmtUserAvatar,
+        cmtUserId: req.session.passport.user.id,
+        cmtUserName: req.session.passport.user.username,
+        cmtUserAvatar: req.session.passport.user.avatar ? req.session.passport.user.avatar : JSON.parse(req.session.passport.user._raw).avatar_url,
         content: modelObj.content,
         mbId: modelObj.mbId,
         sendTime: modelObj.sendTime
