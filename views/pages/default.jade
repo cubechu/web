@@ -4,19 +4,20 @@ block content
         div.user #{userName}
             a(href="/logout") 退出
         #editor
-            form(ng-controller="sendMsgCtrl")
+            form(ng-controller="sendMbCtrl")
                 textarea(placeholder="有啥新鲜事和同事聊聊", ng-model="sendText")
                 .editorCtrl
-                    input(type="button", value="发布", ng-click="sendMsg()")
+                    input(type="button", value="发布", ng-click="sendMb()")
 
-        ul(ng-controller="blogListCtrl")
-            li(ng-repeat="blog in blogList")
-                a.avatar(ng-href="/{{blog.userid}}")
-                    img(ng-src="{{blog.avatar}}")
+        ul(ng-controller="mbListCtrl")
+            li(ng-repeat="mb in mbList" id="{{mb._id}}")
+                a.avatar(ng-href="/{{mb.userId}}")
+                    img(ng-src="{{mb.avatar}}")
                 div
-                    a(ng-href="/{{blog.userid}}", ng-bind="blog.username")
-                    p(ng-bind="blog.content")
+                    a(ng-href="/{{mb.userId}}", ng-bind="mb.userName")
+                    p(ng-bind="mb.content")
                 div.ctrl
                     a.like(href="javascript:;") 赞
-                    a(href="javascript:;", class="cmt", ng-click="toggle()") 回复
-                    comment
+                    a(href="javascript:;", class="cmt-btn", ng-click="toggle()") 回复
+                    commenteditor
+                commentlist

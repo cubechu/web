@@ -1,8 +1,8 @@
 require.config({
-    baseUrl: "/script/",
+    baseUrl: "/js/",
     paths: {
-        "jquery": "jquery.min",
-        "angular": "angular.min",
+        "jquery": "public/jquery.min",
+        "angular": "public/angular.min",
         "app": "default/default"
     },
     shim: {
@@ -11,8 +11,8 @@ require.config({
         }
     }
 });
-require(["app", "jquery", "angular"], function(app, $, angular){
-    $(function(){
+require(["app", "jquery", "angular"], function (app, $, angular) {
+    $(function () {
         angular.bootstrap(document, ["app"]);
     });
 });

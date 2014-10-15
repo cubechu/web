@@ -1,15 +1,16 @@
 var mongoose = require('mongoose');
 var microblogSchema = new mongoose.Schema({
-    userid: {type: String},
-    username: {type: String},
+    userId: {type: String},
+    userName: {type: String},
     avatar: {type: String},
     content: {type: String},
-    sendtime: {type: Date, default: Date.now()}
+    comment: {type: Array},
+    sendTime: {type: Date, default: Date.now()}
 });
 
 microblogSchema.statics = {
-    fetch: function(cb){
-        return this.find({}).sort({'sendtime': 'desc'}).exec(cb);
+    fetch: function (cb) {
+        return this.find({}).sort({'sendTime': 'desc'}).exec(cb);
     }
 };
 

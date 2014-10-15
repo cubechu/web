@@ -1,0 +1,13 @@
+<div class="cmtList">
+    <ul>
+        <li class="cmt" ng-repeat="cmt in mb.comment">
+            <a ng-href="/{{cmt.cmtUserId}}" class="avatar">
+                <img ng-src="{{cmt.cmtUserAvatar}}" />
+            </a>
+            <div>
+                <a ng-href="/{{cmt.cmtUserId}}" ng-bind="cmt.cmtUserName"></a>
+                <span ng-bind="cmt.content"></span>
+            </div>
+        </li>
+    </ul>
+</div>

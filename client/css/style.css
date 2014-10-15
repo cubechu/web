@@ -19,4 +19,7 @@ textarea{width: 1000px; height: 80px;}
 textarea.cmt-input{width:500px; height: 24px;padding: 2px;}
 .editorCtrl{text-align: right; width: 1000px;}
 .user{text-align: right;}
-a.cmt{margin-left:10px;}
+a.cmt-btn{margin-left:10px;}
+li.cmt{min-height: 25px;padding: 10px 0 10px 30px;}
+li.cmt a.avatar{width:25px; height: 25px;  }
+li.cmt a.avatar img{width:25px; height: 25px;}

@@ -26,7 +26,7 @@ if ('development' == app.get('env')) {
 }
 
 // github oauth
-passport.use(new GithubStrategy(config.github,function(accessToken, refreshToken, profile, done) {
+passport.use(new GithubStrategy(config.github, function (accessToken, refreshToken, profile, done) {
     done(null, profile);
 }));
 

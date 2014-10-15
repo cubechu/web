@@ -21,11 +21,15 @@ module.exports = function (app) {
     });
 
     //微博列表
-    app.get('/blogList', def.blogList);
+    app.get('/mbList', def.mbList);
 
     //发送消息
-    app.all('/sendMsg', isLoggedIn);
-    app.post('/sendMsg', def.sendMsg);
+    app.all('/sendMb', isLoggedIn);
+    app.post('/sendMb', def.sendMb);
+
+    //发送回复
+    app.all('/sendCmt', isLoggedIn);
+    app.post('/sendCmt', def.sendCmt);
 
     //github登录
     app.all('/github', isLoggedIn);
