@@ -69,7 +69,7 @@ exports.default = function (req, res) {
     });
 };
 
-//mbList
+//微博列表
 exports.mbList = function (req, res) {
     Model.microblog.fetch(function (err, microblog) {
         if (err) {
