@@ -46,7 +46,7 @@ define(["angular"], function (ng) {
         });
     });
 
-    //回复
+    //回复指令
     appModule.directive('commenteditor', function () {
         return {
             restrict: 'EA',
@@ -61,7 +61,7 @@ define(["angular"], function (ng) {
         }
     });
 
-    //回复列表
+    //回复内容指令
     appModule.directive('commentlist', function () {
         return {
             restrict: 'EA',
