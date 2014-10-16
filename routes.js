@@ -41,7 +41,7 @@ module.exports = function (app) {
             failureRedirect: '/'
         }));
 }
-
+//是否是登录状态
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
