@@ -39,30 +39,46 @@ define(["angular"], function (ng) {
             for (var i = 0; i < $scope.mbList.length; i++) {
                 if ($scope.mbList[i]._id == msg.mbId && $scope.mbList[i].comment) {
                     $scope.mbList[i].comment.unshift(msg);
-                } else if($scope.mbList[i]._id == msg.mbId && !$scope.mbList[i].comment){
+                } else if ($scope.mbList[i]._id == msg.mbId && !$scope.mbList[i].comment) {
                     $scope.mbList[i].comment = [msg];
                 }
             }
         });
     });
 
-    //回复指令
-    appModule.directive('commenteditor', function () {
+    //回复交互及提交指令
+    appModule.directive('commentEditor', function ($http) {
         return {
             restrict: 'EA',
             replace: true,
             templateUrl: '/tpl/commentEditor.html',
             link: function (scope, element, attrs) {
                 scope.showMe = false;
-                scope.toggle = function toggle() {
+                scope.cmtToggle = function () {
                     scope.showMe = !scope.showMe;
-                }
+                };
+                scope.sendCmt = function (mb) {
+                    $http({
+                        method: 'post',
+                        url: '/sendCmt',
+                        data: {
+                            receiverId: mb.userId,
+                            receiverName: mb.userName,
+                            content: scope.sentText,
+                            mbId: mb._id,
+                            sendTime: Date.now()
+                        }
+                    }).success(function (req) {
+                        scope.sentText = '';
+                        scope.$emit("commentChange", req);
+                    });
+                };
             }
         }
     });
 
     //回复内容指令
-    appModule.directive('commentlist', function () {
+    appModule.directive('commentList', function () {
         return {
             restrict: 'EA',
             replace: true,
@@ -70,24 +86,13 @@ define(["angular"], function (ng) {
         }
     });
 
-    //提交回复
-    appModule.controller('sendCmtCtrl', function ($scope, $http) {
-        $scope.sendCmt = function (mb) {
-            $http({
-                method: 'post',
-                url: '/sendCmt',
-                data: {
-                    receiverId: mb.userId,
-                    receiverName: mb.userName,
-                    content: $scope.sentText,
-                    mbId: mb._id,
-                    sendTime: Date.now()
-                }
-            }).success(function (req) {
-                $scope.sentText = '';
-                $scope.$emit("commentChange", req);
-            });
-        };
+    //操作按钮
+    appModule.directive('operationBtn', function () {
+        return {
+            restrict: 'EA',
+            replace: true,
+            templateUrl: '/tpl/operationBtn.html'
+        }
     });
 
     return appModule;

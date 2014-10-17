@@ -16,8 +16,6 @@ block content
                 div
                     a(ng-href="/{{mb.userId}}", ng-bind="mb.userName")
                     p(ng-bind="mb.content")
-                div.ctrl
-                    a.like(href="javascript:;") 赞
-                    a(href="javascript:;", class="cmt-btn", ng-click="toggle()") 回复
-                    commenteditor
-                commentlist
+                operation-btn
+                comment-editor
+                comment-list
