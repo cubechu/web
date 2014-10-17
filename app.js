@@ -27,7 +27,7 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
-// github oauth
+// github oauth第三方登录
 passport.use(new GithubStrategy(config.github, function (accessToken, refreshToken, profile, done) {
     done(null, profile);
 }));
