@@ -4,12 +4,14 @@ var express = require('express'),
     path = require('path'),
     config = require('./config/config'),
     app = express(),
+    connectDomain = require('connect-domain'),
     passport = require('passport'),
     GithubStrategy = require('passport-github').Strategy;
 
 app.set('port', process.env.PORT || config.listenPort);
 app.set('views', __dirname + '/views/pages');
 app.set('view engine', 'jade');
+app.use(connectDomain());
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
