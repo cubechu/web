@@ -4,8 +4,8 @@ module.exports = {
     maxAge: 600000,
     db: 'mongodb://192.168.22.155:27017/myapp',
     github: {
-        clientID: "6245ae3122580e682e90",
-        clientSecret: "186a34055da5184f9c6144063679b033642c0ab3",
+        clientID: "0c2bf039a80e36880b8a",
+        clientSecret: "f39e9b511d70093d329ceaccf435d7a8d411c5ed",
         callbackURL: "http://192.168.22.90:3006/auth/github/callback"
     }
 };
