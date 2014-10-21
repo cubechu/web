@@ -1,3 +1,5 @@
+<pre>
+<code>
 node.js + mongoose + angular.js + require.js + bootstrap
 
 menus and files:
@@ -22,3 +24,5 @@ menus and files:
 -package.json  //信息文件
 
 -routes.js  //路由
+</code>
+</pre>
