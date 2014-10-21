@@ -10,7 +10,7 @@ menus and files:
     +web  //网站宣传及其他静态文件
 
 +config
-    -config.js  //网站配置文件
+    -config.js  //配置文件
 
 +controllers  //控制器
 
