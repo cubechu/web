@@ -71,7 +71,7 @@ exports.default = function (req, res) {
 
 //微博列表
 exports.mbList = function (req, res) {
-    Model.microblog.fetch(function (err, microblog) {
+    Model.microblog.fetch(req.query.lastsendtime, function (err, microblog) {
         if (err) {
             console.log(err);
         }

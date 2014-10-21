@@ -9,8 +9,12 @@ var microblogSchema = new mongoose.Schema({
 });
 
 microblogSchema.statics = {
-    fetch: function (cb) {
-        return this.find({}).sort({'sendTime': 'desc'}).exec(cb);
+    fetch: function (lastMbSendTime, cb) {
+        var obj = {};
+        if (lastMbSendTime) {
+            obj = {sendTime: {$gt: lastMbSendTime}};
+        }
+        return this.find(obj).sort({'sendTime': 'desc'}).exec(cb);
     }
 };
 

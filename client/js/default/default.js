@@ -77,8 +77,15 @@ define(["angular", "io"], function (ng, io) {
         });
         //最新微博
         $scope.getLatestMb = function () {
-            console.log(11);
             $scope.hasNew = true;
+            $http({
+                method: 'get',
+                url: '/mbList?lastsendtime=' + $scope.mbList[0].sendTime
+            }).success(function (req) {
+                for(var i = 0; i < req.length; i++){
+                    $scope.mbList.unshift(req[i]);
+                }
+            });
         };
     });
 

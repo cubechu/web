@@ -23,3 +23,4 @@ a.cmt-btn{margin-left:10px;}
 li.cmt{min-height: 25px;padding: 10px 0 10px 30px;}
 li.cmt a.avatar{width:25px; height: 25px;  }
 li.cmt a.avatar img{width:25px; height: 25px;}
+.get-latest{ background: #efefef; cursor: pointer;}
