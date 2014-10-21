@@ -1,4 +1,4 @@
-define(["angular"], function (ng) {
+define(["angular", "io"], function (ng, io) {
     var appModule = ng.module('app', []);
 
     appModule.controller('wrapCtrl', function ($scope) {
@@ -7,8 +7,32 @@ define(["angular"], function (ng) {
         });
     });
 
+    appModule.factory('socket', function ($rootScope) {
+        var socket = io.connect('http://localhost:3006');
+        return {
+            on: function (eventName, callback) {
+                socket.on(eventName, function () {
+                    var args = arguments;
+                    $rootScope.$apply(function () {
+                        callback.apply(socket, args);
+                    });
+                });
+            },
+            emit: function (eventName, data, callback) {
+                socket.emit(eventName, data, function () {
+                    var args = arguments;
+                    $rootScope.$apply(function () {
+                        if (callback) {
+                            callback.apply(socket, args);
+                        }
+                    });
+                });
+            }
+        };
+    });
+
     //发送消息
-    appModule.controller('sendMbCtrl', function ($scope, $http) {
+    appModule.controller('sendMbCtrl', function ($scope, $http, socket) {
         $scope.sendMb = function () {
             $http({
                 method: 'post',
@@ -20,18 +44,25 @@ define(["angular"], function (ng) {
             }).success(function (req) {
                 $scope.sendText = '';
                 $scope.$emit("microblogChange", req);
+                socket.emit('broadcast:msg', req);
             });
         };
     });
 
     //微博列表
-    appModule.controller('mbListCtrl', function ($scope, $http) {
+    appModule.controller('mbListCtrl', function ($scope, $http, socket) {
         $http({
             method: 'get',
             url: '/mbList'
         }).success(function (req) {
             $scope.mbList = req;
         });
+        $scope.hasNew = true;
+        //新消息处理
+        socket.on('new:msg', function (msg) {
+            $scope.hasNew = false;
+        });
+
         $scope.$on("changeFromParent", function (event, msg) {
             $scope.mbList.unshift(msg);
         });
@@ -44,6 +75,11 @@ define(["angular"], function (ng) {
                 }
             }
         });
+        //最新微博
+        $scope.getLatestMb = function () {
+            console.log(11);
+            $scope.hasNew = true;
+        };
     });
 
     //回复交互及提交指令

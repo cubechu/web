@@ -10,6 +10,7 @@ block content
                     input(type="button", value="发布", ng-click="sendMb()")
 
         ul(ng-controller="mbListCtrl")
+            li(ng-hide="hasNew", ng-click="getLatestMb()") 有新微博，点击查看
             li(ng-repeat="mb in mbList" id="{{mb._id}}")
                 a.avatar(ng-href="/{{mb.userId}}")
                     img(ng-src="{{mb.avatar}}")
