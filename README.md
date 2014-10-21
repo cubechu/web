@@ -7,7 +7,7 @@ menus and files:
     +css
     +js
     +tpl  //angular模板文件
-    +web  //网站宣传及其他静态文件
+    +web  //宣传及其他文件
 
 +config
     -config.js  //配置文件
