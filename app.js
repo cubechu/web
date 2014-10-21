@@ -1,11 +1,12 @@
 var express = require('express'),
     routes = require('./routes'),
-    http = require('http'),
     path = require('path'),
     config = require('./config/config'),
     app = express(),
+    server = require('http').createServer(app),
     connectDomain = require('connect-domain'),
     passport = require('passport'),
+    io = require('socket.io').listen(server),
     GithubStrategy = require('passport-github').Strategy;
 
 app.set('port', process.env.PORT || config.listenPort);
@@ -27,6 +28,17 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
+//设置日志级别
+io.set('log level', 1);
+//WebSocket连接监听
+io.on('connection', function (socket) {
+    // 对message事件的监听
+    socket.on('broadcast:msg', function (msg) {
+        // 广播向其他用户发消息
+        socket.broadcast.emit('new:msg', msg);
+    });
+});
+
 // github oauth
 passport.use(new GithubStrategy(config.github, function (accessToken, refreshToken, profile, done) {
     done(null, profile);
@@ -43,6 +55,6 @@ passport.deserializeUser(function (user, done) {//删除user对象
 // routes
 routes(app);
 
-http.createServer(app).listen(app.get('port'), function () {
+server.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });

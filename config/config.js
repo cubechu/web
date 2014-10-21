@@ -8,4 +8,4 @@ module.exports = {
         clientSecret: "186a34055da5184f9c6144063679b033642c0ab3",
         callbackURL: "http://192.168.22.90:3000/auth/github/callback"
     }
-}
+};

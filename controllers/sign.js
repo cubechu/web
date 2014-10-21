@@ -19,5 +19,8 @@ exports.login = function (req, res) {
             return done(null, user);
         }
     ));
-    res.render('login', { title: 'login' });
+    res.render('login', {
+        title: '',
+        file: 'login'
+    });
 };
