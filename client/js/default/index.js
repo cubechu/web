@@ -1,7 +1,9 @@
 require.config({
     paths: {
         "jquery": "/js/public/jquery.min",
-        "angular": "/js/public/angular.min",
+        "angular": "/js/public/angular",
+        "bootStrap": "/js/public/bootstrap.min",
+        "angularFileUpload": "/js/public/angular-file-upload.min",
         "app": "/js/default/default",
         "io": "/socket.io/socket.io"
     },
@@ -11,7 +13,7 @@ require.config({
         }
     }
 });
-require(["app", "jquery", "angular", "io"], function (app, $, angular, io) {
+require(["app", "jquery", "angular"], function (app, $, angular) {
     $(function () {
         angular.bootstrap(document, ["app"]);
     });

@@ -1,4 +1,5 @@
-var Model = require('../models/index');
+var Model = require('../models/index'),
+    fs = require('fs');
 
 //发送消息
 exports.sendMb = function (req, res) {
@@ -89,6 +90,23 @@ exports.mbList = function (req, res) {
             res.send(microblog);
         });
     });
+};
+
+exports.fileUpload = function (req, res) {
+    console.log(req.files);
+    /*if (req.files && req.files.thumbnail != 'undifined') {
+
+        *//*
+        var temp_path = req.files.thumbnail.path;
+        if (temp_path) {
+            fs.readFile(temp_path, 'utf-8', function (err, content) {
+                //文件的内容
+                console.log('content', content);
+                // 删除临时文件
+                fs.unlink(temp_path);
+            });
+        }*//*
+    }*/
 };
 
 //用户类型判断

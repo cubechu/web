@@ -9,6 +9,53 @@ block content
                 .editorCtrl
                     input(type="button", value="发布", ng-click="sendMb()")
 
+            div(class="container", ng-controller="uploadController", nv-file-drop="", uploader="uploader", filters="queueLimit, customFilter")
+                div(class="row")
+                    div(class="col-md-3")
+                        h3 Select files
+                        div(ng-show="uploader.isHTML5")
+                            div(class="well my-drop-zone", nv-file-over="", uploader="uploader") Base drop zone
+                        input(type="file", nv-file-select="", uploader="uploader", multiple)
+                    div(class="col-md-9", style="margin-bottom: 40px")
+                        h3 Upload queue
+                        p Queue length: {{ uploader.queue.length }}
+                        table(class="table")
+                            thead
+                                tr
+                                    th(width="50%") Name
+                                    th(ng-show="uploader.isHTML5") Size
+                                    th(ng-show="uploader.isHTML5") Progress
+                                    th Status
+                                    th Actions
+
+                            tbody
+                                tr(ng-repeat="item in uploader.queue")
+                                    td
+                                        strong {{ item.file.name }}
+                                    td(ng-show="uploader.isHTML5", nowrap) {{ item.file.size/1024/1024|number:2 }} MB
+                                    td(ng-show="uploader.isHTML5")
+                                        div(class="progress", style="margin-bottom: 0;")
+                                            div(class="progress-bar", role="progressbar", ng-style="{ 'width': item.progress + '%' }")
+
+
+                                    td(class="text-center")
+                                        span(ng-show="item.isSuccess")
+                                            i(class="glyphicon glyphicon-ok")
+                                        span(ng-show="item.isCancel")
+                                            i(class="glyphicon glyphicon-ban-circle")
+                                        span(ng-show="item.isError")
+                                            i(class="glyphicon glyphicon-remove")
+
+                                    td nowrap
+                                        button(type="button", class="btn btn-success btn-xs", ng-click="item.upload()", ng-disabled="item.isReady || item.isUploading || item.isSuccess")
+                                            span(class="glyphicon glyphicon-upload") Upload
+
+                                        button(type="button", class="btn btn-warning btn-xs", ng-click="item.cancel()", ng-disabled="!item.isUploading")
+                                            span(class="glyphicon glyphicon-ban-circle") Cancel
+
+                                        button(type="button", class="btn btn-danger btn-xs", ng-click="item.remove()")
+                                            span(class="glyphicon glyphicon-trash") Remove
+
         ul(ng-controller="mbListCtrl")
             li(ng-hide="hasNew", ng-click="getLatestMb()", ng-cloak, class="ng-cloak get-latest") 有新微博，点击查看
             li(ng-repeat="mb in mbList",id="{{mb._id}}", ng-cloak, class="ng-cloak")

@@ -40,6 +40,8 @@ module.exports = function (app) {
             successRedirect: '/default',
             failureRedirect: '/'
         }));
+
+    app.post('/fileUpload', def.fileUpload);
 };
 //是否是登录状态
 function isLoggedIn(req, res, next) {
