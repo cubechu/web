@@ -1,5 +1,7 @@
 var Model = require('../models/index'),
-    fs = require('fs');
+    fs = require('fs'),
+    http = require('http'),
+    qs = require('querystring');
 
 //发送消息
 exports.sendMb = function (req, res) {
@@ -72,6 +74,57 @@ exports.default = function (req, res) {
 
 //微博列表
 exports.mbList = function (req, res) {
+    //http get
+    /*var data = {
+     networkId: 'ffb41aba-f56e-4ce5-9b64-6ce86d248e63'
+     };
+
+     var options = {
+     hostname: '172.20.137.142',
+     port: 8080,
+     path: '/space/show?' + qs.stringify(data),
+     method: 'GET'
+     };
+
+     http.request(options, function (res) {
+     console.log('STATUS: ' + res.statusCode);
+     console.log('HEADERS: ' + JSON.stringify(res.headers));
+     res.setEncoding('utf8');
+     res.on('data', function (chunk) {
+     console.log('BODY: ' + chunk);
+     });
+     }).on('error', function (e) {
+     console.log('problem with request: ' + e.message);
+     }).end();*/
+
+    //http post
+
+    /*var post_data = {
+        currentUserId: '4e420a24cce7a2ad930fc948',
+        name: '吃喝玩乐疯'
+    };
+
+    var options = {
+        hostname: '172.20.137.142',
+        port: 8080,
+        path: '/space/create',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        }
+    };
+
+    http.request(options, function (res) {
+        console.log('STATUS: ' + res.statusCode);
+        console.log('HEADERS: ' + JSON.stringify(res.headers));
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            console.log('BODY: ' + chunk);
+        });
+    }).on('error', function (e) {
+        console.log('problem with request: ' + e.message);
+    }).end(qs.stringify(post_data));*/
+
     Model.microblog.fetch(req.query.lastsendtime, function (err, microblog) {
         if (err) {
             console.log(err);
@@ -96,17 +149,19 @@ exports.fileUpload = function (req, res) {
     console.log(req.files);
     /*if (req.files && req.files.thumbnail != 'undifined') {
 
-        *//*
-        var temp_path = req.files.thumbnail.path;
-        if (temp_path) {
-            fs.readFile(temp_path, 'utf-8', function (err, content) {
-                //文件的内容
-                console.log('content', content);
-                // 删除临时文件
-                fs.unlink(temp_path);
-            });
-        }*//*
-    }*/
+     */
+    /*
+     var temp_path = req.files.thumbnail.path;
+     if (temp_path) {
+     fs.readFile(temp_path, 'utf-8', function (err, content) {
+     //文件的内容
+     console.log('content', content);
+     // 删除临时文件
+     fs.unlink(temp_path);
+     });
+     }*/
+    /*
+     }*/
 };
 
 //用户类型判断
