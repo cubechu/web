@@ -40,7 +40,7 @@ module.exports = function (app) {
             successRedirect: '/default',
             failureRedirect: '/'
         }));
-
+    //文件上传
     app.post('/fileUpload', def.fileUpload);
 };
 //是否是登录状态

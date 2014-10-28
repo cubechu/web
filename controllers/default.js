@@ -100,30 +100,30 @@ exports.mbList = function (req, res) {
     //http post
 
     /*var post_data = {
-        currentUserId: '4e420a24cce7a2ad930fc948',
-        name: '吃喝玩乐疯'
-    };
+     currentUserId: '4e420a24cce7a2ad930fc948',
+     name: '吃喝玩乐疯'
+     };
 
-    var options = {
-        hostname: '172.20.137.142',
-        port: 8080,
-        path: '/space/create',
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-        }
-    };
+     var options = {
+     hostname: '172.20.137.142',
+     port: 8080,
+     path: '/space/create',
+     method: 'POST',
+     headers: {
+     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+     }
+     };
 
-    http.request(options, function (res) {
-        console.log('STATUS: ' + res.statusCode);
-        console.log('HEADERS: ' + JSON.stringify(res.headers));
-        res.setEncoding('utf8');
-        res.on('data', function (chunk) {
-            console.log('BODY: ' + chunk);
-        });
-    }).on('error', function (e) {
-        console.log('problem with request: ' + e.message);
-    }).end(qs.stringify(post_data));*/
+     http.request(options, function (res) {
+     console.log('STATUS: ' + res.statusCode);
+     console.log('HEADERS: ' + JSON.stringify(res.headers));
+     res.setEncoding('utf8');
+     res.on('data', function (chunk) {
+     console.log('BODY: ' + chunk);
+     });
+     }).on('error', function (e) {
+     console.log('problem with request: ' + e.message);
+     }).end(qs.stringify(post_data));*/
 
     Model.microblog.fetch(req.query.lastsendtime, function (err, microblog) {
         if (err) {

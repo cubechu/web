@@ -1,5 +1,15 @@
 define(["angular", "io", "angularFileUpload"], function (ng, io) {
     var appModule = ng.module('app', ['angularFileUpload']);
+
+    appModule.directive('fileUploader', function () {
+        return {
+            restrict: 'EA',
+            replace: true,
+            templateUrl: '/tpl/uploader.html',
+            controller: 'uploadController'
+        }
+    });
+
     //文件上传
     appModule.controller('uploadController', ['$scope', 'FileUploader', function ($scope, FileUploader) {
         var uploader = $scope.uploader = new FileUploader({

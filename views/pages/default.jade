@@ -8,53 +8,7 @@ block content
                 textarea(placeholder="有啥新鲜事和同事聊聊", ng-model="sendText")
                 .editorCtrl
                     input(type="button", value="发布", ng-click="sendMb()")
-
-            div(class="container", ng-controller="uploadController", nv-file-drop="", uploader="uploader", filters="queueLimit, customFilter")
-                div(class="row")
-                    div(class="col-md-3")
-                        div(ng-show="uploader.isHTML5")
-                            div(class="well my-drop-zone", nv-file-over="", uploader="uploader") 拖动上传
-                        input(type="file", nv-file-select="", uploader="uploader", multiple)
-                    div(class="col-md-9", style="margin-bottom: 40px")
-                        h3 上传列表
-                        p 文件数: {{ uploader.queue.length }}
-                        table(class="table")
-                            thead
-                                tr
-                                    th(width="50%") 名称
-                                    th(ng-show="uploader.isHTML5") 大小
-                                    th(ng-show="uploader.isHTML5") 进度
-                                    th 状态
-                                    th 操作
-
-                            tbody
-                                tr(ng-repeat="item in uploader.queue")
-                                    td
-                                        strong {{ item.file.name }}
-                                    td(ng-show="uploader.isHTML5", nowrap) {{ item.file.size/1024/1024|number:2 }} MB
-                                    td(ng-show="uploader.isHTML5")
-                                        div(class="progress", style="margin-bottom: 0;")
-                                            div(class="progress-bar", role="progressbar", ng-style="{ 'width': item.progress + '%' }")
-
-
-                                    td(class="text-center")
-                                        span(ng-show="item.isSuccess")
-                                            i(class="glyphicon glyphicon-ok")
-                                        span(ng-show="item.isCancel")
-                                            i(class="glyphicon glyphicon-ban-circle")
-                                        span(ng-show="item.isError")
-                                            i(class="glyphicon glyphicon-remove")
-
-                                    td
-                                        button(type="button", class="btn btn-success btn-xs", ng-click="item.upload()", ng-disabled="item.isReady || item.isUploading || item.isSuccess")
-                                            span(class="glyphicon glyphicon-upload") 上传
-
-                                        button(type="button", class="btn btn-warning btn-xs", ng-click="item.cancel()", ng-disabled="!item.isUploading")
-                                            span(class="glyphicon glyphicon-ban-circle") 取消
-
-                                        button(type="button", class="btn btn-danger btn-xs", ng-click="item.remove()")
-                                            span(class="glyphicon glyphicon-trash") 删除
-
+            file-uploader
         ul(ng-controller="mbListCtrl")
             li(ng-hide="hasNew", ng-click="getLatestMb()", ng-cloak, class="ng-cloak get-latest") 有新微博，点击查看
             li(ng-repeat="mb in mbList",id="{{mb._id}}", ng-cloak, class="ng-cloak")
