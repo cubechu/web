@@ -5,7 +5,8 @@ require.config({
         "bootStrap": "/js/public/bootstrap.min",
         "angularFileUpload": "/js/public/angular-file-upload.min",
         "app": "/js/default/default",
-        "io": "/socket.io/socket.io"
+        "io": "/socket.io/socket.io",
+        "uploader": "/js/component/uploader"
     },
     shim: {
         "angular": {
