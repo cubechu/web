@@ -1,35 +1,11 @@
-define(["angular", "io", "uploader"], function (ng, io) {
+define(["angular", "uploader", "socketFactory"], function (ng) {
 
-    var appModule = ng.module('app', ['uploaderComponent']);
+    var appModule = ng.module('app', ['uploaderComponent', 'socketComponent']);
 
     appModule.controller('wrapCtrl', function ($scope) {
         $scope.$on("microblogChange", function (event, msg) {
             $scope.$broadcast("changeFromParent", msg);
         });
-    });
-
-    appModule.factory('socket', function ($rootScope) {
-        var socket = io.connect('http://localhost:3006');
-        return {
-            on: function (eventName, callback) {
-                socket.on(eventName, function () {
-                    var args = arguments;
-                    $rootScope.$apply(function () {
-                        callback.apply(socket, args);
-                    });
-                });
-            },
-            emit: function (eventName, data, callback) {
-                socket.emit(eventName, data, function () {
-                    var args = arguments;
-                    $rootScope.$apply(function () {
-                        if (callback) {
-                            callback.apply(socket, args);
-                        }
-                    });
-                });
-            }
-        };
     });
 
     //发送消息
