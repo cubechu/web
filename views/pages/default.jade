@@ -11,6 +11,6 @@ block content
             div(mb-file-uploader)
         ul(ng-controller="mbCtrl")
             li(ng-hide="hasNew", ng-click="getLatestMb()", ng-cloak, class="ng-cloak get-latest") 有新微博，点击查看
-            div(mb-list, ng-repeat="mb in mbList")
+            li(mb-list, ng-repeat="mb in mbList")
                 div(mb-operation)
                 div(mb-comment)
