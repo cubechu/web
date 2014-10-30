@@ -1,0 +1,12 @@
+<li id="{{mb._id}}" ng-cloak class="ng-cloak">
+    <a class="avatar" ng-href="/{{mb.userId}}">
+        <img ng-src="{{mb.avatar}}"/>
+    </a>
+
+    <div>
+        <a ng-href="/{{mb.userId}}" ng-bind="mb.userName"></a>
+        <p ng-bind="mb.content"></p>
+    </div>
+
+    <div ng-transclude></div>
+</li>

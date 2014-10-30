@@ -9,14 +9,8 @@ block content
                 .editorCtrl
                     input(type="button", value="发布", ng-click="sendMb()")
             file-uploader
-        ul(ng-controller="mbListCtrl")
+        ul(ng-controller="mbCtrl")
             li(ng-hide="hasNew", ng-click="getLatestMb()", ng-cloak, class="ng-cloak get-latest") 有新微博，点击查看
-            li(ng-repeat="mb in mbList",id="{{mb._id}}", ng-cloak, class="ng-cloak")
-                a.avatar(ng-href="/{{mb.userId}}")
-                    img(ng-src="{{mb.avatar}}")
-                div
-                    a(ng-href="/{{mb.userId}}", ng-bind="mb.userName")
-                    p(ng-bind="mb.content")
-                operation-btn
-                comment-editor
-                comment-list
+            microblog-list(ng-repeat="mb in mbList")
+                microblog-operation
+                microblog-comment

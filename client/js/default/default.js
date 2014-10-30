@@ -26,31 +26,11 @@ define(["angular", "uploader", "socketFactory"], function (ng) {
         };
     });
 
-    //微博列表
-    appModule.controller('mbListCtrl', function ($scope, $http, socket) {
-        $http({
-            method: 'get',
-            url: '/mbList'
-        }).success(function (req) {
-            $scope.mbList = req;
-        });
+    appModule.controller('mbCtrl', function ($scope, $http, socket) {
         $scope.hasNew = true;
         //新消息处理
         socket.on('new:msg', function (msg) {
             $scope.hasNew = false;
-        });
-
-        $scope.$on("changeFromParent", function (event, msg) {
-            $scope.mbList.unshift(msg);
-        });
-        $scope.$on("commentChange", function (event, msg) {
-            for (var i = 0; i < $scope.mbList.length; i++) {
-                if ($scope.mbList[i]._id == msg.mbId && $scope.mbList[i].comment) {
-                    $scope.mbList[i].comment.unshift(msg);
-                } else if ($scope.mbList[i]._id == msg.mbId && !$scope.mbList[i].comment) {
-                    $scope.mbList[i].comment = [msg];
-                }
-            }
         });
         //最新微博
         $scope.getLatestMb = function () {
@@ -64,15 +44,41 @@ define(["angular", "uploader", "socketFactory"], function (ng) {
                 }
             });
         };
+        $scope.$on("changeFromParent", function (event, msg) {
+            $scope.mbList.unshift(msg);
+        });
+        $scope.$on("commentChange", function (event, msg) {
+            for (var i = 0; i < $scope.mbList.length; i++) {
+                if ($scope.mbList[i]._id == msg.mbId && $scope.mbList[i].comment) {
+                    $scope.mbList[i].comment.unshift(msg);
+                } else if ($scope.mbList[i]._id == msg.mbId && !$scope.mbList[i].comment) {
+                    $scope.mbList[i].comment = [msg];
+                }
+            }
+        });
+        $http({
+            method: 'get',
+            url: '/mbList'
+        }).success(function (req) {
+            $scope.mbList = req;
+        });
     });
 
-
-    //回复交互及提交指令
-    appModule.directive('commentEditor', function ($http) {
+    appModule.directive('microblogList', function () {
         return {
             restrict: 'EA',
             replace: true,
-            templateUrl: '/tpl/commentEditor.html',
+            transclude: true,
+            templateUrl: '/tpl/microblogList.html'
+        }
+    });
+
+    //回复
+    appModule.directive('microblogComment', function ($http) {
+        return {
+            restrict: 'EA',
+            replace: true,
+            templateUrl: '/tpl/microblogComment.html',
             link: function (scope, element, attrs) {
                 scope.showMe = false;
                 scope.cmtToggle = function () {
@@ -95,25 +101,15 @@ define(["angular", "uploader", "socketFactory"], function (ng) {
                     });
                 };
             }
-        }
+        };
     });
 
-    //回复内容指令
-    appModule.directive('commentList', function () {
+    appModule.directive('microblogOperation', function () {
         return {
             restrict: 'EA',
             replace: true,
-            templateUrl: '/tpl/commentList.html'
-        }
-    });
-
-    //操作按钮
-    appModule.directive('operationBtn', function () {
-        return {
-            restrict: 'EA',
-            replace: true,
-            templateUrl: '/tpl/operationBtn.html'
-        }
+            templateUrl: '/tpl/microblogOperation.html'
+        };
     });
 
     return appModule;
