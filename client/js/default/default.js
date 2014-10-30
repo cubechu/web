@@ -64,7 +64,7 @@ define(["angular", "uploader", "socketFactory"], function (ng) {
         });
     });
 
-    appModule.directive('microblogList', function () {
+    appModule.directive('mbList', function () {
         return {
             restrict: 'EA',
             replace: true,
@@ -74,7 +74,7 @@ define(["angular", "uploader", "socketFactory"], function (ng) {
     });
 
     //回复
-    appModule.directive('microblogComment', function ($http) {
+    appModule.directive('mbComment', function ($http) {
         return {
             restrict: 'EA',
             replace: true,
@@ -104,7 +104,7 @@ define(["angular", "uploader", "socketFactory"], function (ng) {
         };
     });
 
-    appModule.directive('microblogOperation', function () {
+    appModule.directive('mbOperation', function () {
         return {
             restrict: 'EA',
             replace: true,

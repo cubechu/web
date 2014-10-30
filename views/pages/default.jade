@@ -8,9 +8,9 @@ block content
                 textarea(placeholder="有啥新鲜事和同事聊聊", ng-model="sendText")
                 .editorCtrl
                     input(type="button", value="发布", ng-click="sendMb()")
-            file-uploader
+            div(mb-file-uploader)
         ul(ng-controller="mbCtrl")
             li(ng-hide="hasNew", ng-click="getLatestMb()", ng-cloak, class="ng-cloak get-latest") 有新微博，点击查看
-            microblog-list(ng-repeat="mb in mbList")
-                microblog-operation
-                microblog-comment
+            div(mb-list, ng-repeat="mb in mbList")
+                div(mb-operation)
+                div(mb-comment)
