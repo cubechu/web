@@ -2,6 +2,7 @@ body {
   padding: 20px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+body { padding-top: 70px; }
 
 a {
   color: #00B7FF;
@@ -10,17 +11,20 @@ a {
 .foot,h1,.container{width: 1000px; margin: 0 auto;}
 h1{padding-bottom: 20px;}
 ul, p{padding:0; margin: 0;}
-li{list-style: none; position: relative; padding-left: 60px; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid #e5e5e5; line-height: 22px;}
-li a.avatar{position: absolute; left:0px; display: block;width: 50px; height: 50px;}
-li a.avatar img{width: 50px; height: 50px;}
-textarea{width: 1000px; height: 80px;}
+li{list-style: none;}
+li.mb-list{ position: relative; padding-left: 60px; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid #e5e5e5; line-height: 22px;}
+li.mb-list a.avatar{position: absolute; left:0px; display: block;width: 50px; height: 50px;}
+li.mb-list a.avatar img{width: 50px; height: 50px;}
+textarea{width: 100%; height: 80px;}
 .cmt-editor{ width: 500px;}
 .cmt-editor p{text-align: right;}
 textarea.cmt-input{width:500px; height: 24px;padding: 2px;}
-.editorCtrl{text-align: right; width: 1000px;}
+.editorCtrl{text-align: right; width: 100%;}
+.editorCtrl .pull-left{ margin-right: 10px;}
 .user{text-align: right;}
 a.cmt-btn{margin-left:10px;}
 li.cmt{min-height: 25px;padding: 10px 0 10px 30px;}
-li.cmt a.avatar{width:25px; height: 25px;  }
+li.cmt a.avatar{width:25px; height: 25px; left: 60px; }
 li.cmt a.avatar img{width:25px; height: 25px;}
 .get-latest{ background: #efefef; cursor: pointer;}
+.pub-box .nav-tabs{margin-bottom: 15px;}

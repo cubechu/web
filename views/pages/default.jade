@@ -1,16 +1,31 @@
 extends ../layout
 block content
     div.container(ng-controller="wrapCtrl")
-        div.user #{userName}
-            a(href="/logout") 退出
-        #editor
-            form(ng-controller="sendMbCtrl")
-                textarea(placeholder="有啥新鲜事和同事聊聊", ng-model="sendText")
-                .editorCtrl
-                    input(type="button", value="发布", ng-click="sendMb()")
-            div(mb-file-uploader)
-        ul(ng-controller="mbCtrl")
-            li(ng-hide="hasNew", ng-click="getLatestMb()", ng-cloak, class="ng-cloak get-latest") 有新微博，点击查看
-            li(mb-list, ng-repeat="mb in mbList")
-                div(mb-operation)
-                div(mb-comment)
+        .row
+            div.col-md-2
+                include ../includes/left
+            div.col-md-8.pub-box
+                ul(class="nav nav-tabs", role="tablist")
+                    li(role="presentation", class="active")
+                        a(show-tab="", href="#mbEditor", role="tab", data-toggle="tab") 微博
+                    li(role="presentation")
+                        a(show-tab="", href="#docEditor", role="tab", data-toggle="tab") 文档
+                div(class="tab-content")
+                    div(role="tabpanel", class="tab-pane fade in active", id="mbEditor")
+                        form(ng-controller="sendMbCtrl")
+                            textarea(placeholder="有啥新鲜事和同事聊聊", ng-model="sendText")
+                            .editorCtrl
+                                a(href="", class="pull-left") 表情
+                                a(href="", class="pull-left") 附件
+                                input(type="button", value="发布", ng-click="sendMb()")
+                        div(mb-file-uploader)
+                    div(role="tabpanel", id="docEditor", class="tab-pane fade")
+                        a(href="") 上传文档
+
+                ul(ng-controller="mbCtrl")
+                    li(ng-hide="hasNew", ng-click="getLatestMb()", ng-cloak, class="ng-cloak get-latest") 有新微博，点击查看
+                    li(mb-list, ng-repeat="mb in mbList")
+                        div(mb-operation)
+                        div(mb-comment)
+            div.col-md-2
+                span 邀请同事

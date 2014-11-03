@@ -15,7 +15,7 @@ require.config({
         }
     }
 });
-require(["app", "jquery", "angular"], function (app, $, angular) {
+require(["app", "jquery", "angular", "bootStrap"], function (app, $, angular) {
     $(function () {
         angular.bootstrap(document, ["app"]);
     });

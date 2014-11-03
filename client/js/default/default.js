@@ -8,6 +8,17 @@ define(["angular", "uploader", "socketFactory"], function (ng) {
         });
     });
 
+    appModule.directive('showTab', function () {
+        return {
+            link: function (scope, element, attrs) {
+                element.click(function (e) {
+                    e.preventDefault();
+                    $(element).tab('show');
+                });
+            }
+        };
+    });
+
     //发送消息
     appModule.controller('sendMbCtrl', function ($scope, $http, socket) {
         $scope.sendMb = function () {

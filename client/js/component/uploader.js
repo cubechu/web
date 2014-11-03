@@ -2,7 +2,7 @@ define(['angular', 'angularFileUpload'], function(ng) {
 
     var appModule = ng.module('uploaderComponent', ['angularFileUpload']);
 
-    appModule.directive('fileUploader', function () {
+    appModule.directive('mbFileUploader', function () {
         return {
             restrict: 'EA',
             replace: true,
