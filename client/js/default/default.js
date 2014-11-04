@@ -1,6 +1,6 @@
-define(["angular", "uploader", "socketFactory"], function (ng) {
+define(["angular", "sendMicroblog", "socketFactory"], function (ng) {
 
-    var appModule = ng.module('app', ['uploaderComponent', 'socketComponent']);
+    var appModule = ng.module('app', ['sendMicroblogComponent', 'socketComponent']);
 
     appModule.controller('wrapCtrl', function ($scope) {
         $scope.$on("microblogChange", function (event, msg) {

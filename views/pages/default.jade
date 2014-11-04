@@ -11,14 +11,8 @@ block content
                     li(role="presentation")
                         a(show-tab="", href="#docEditor", role="tab", data-toggle="tab") 文档
                 div(class="tab-content")
-                    div(role="tabpanel", class="tab-pane fade in active", id="mbEditor")
-                        form(ng-controller="sendMbCtrl")
-                            textarea(placeholder="有啥新鲜事和同事聊聊", ng-model="sendText")
-                            .editorCtrl
-                                a(href="", class="pull-left") 表情
-                                a(href="", class="pull-left") 附件
-                                input(type="button", value="发布", ng-click="sendMb()")
-                        div(mb-file-uploader)
+                    div(role="tabpanel", class="tab-pane fade in active", id="mbEditor", ng-controller="sendMbCtrl")
+                        div(mb-send-microblog)
                     div(role="tabpanel", id="docEditor", class="tab-pane fade")
                         a(href="") 上传文档
 

@@ -1,14 +1,16 @@
-<div class="container" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
-    <div class="row">
-        <div class="col-md-3">
+<div nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+        <div>
             <div ng-show="uploader.isHTML5">
-                <div class="well my-drop-zone" nv-file-over="" uploader="uploader">拖动上传</div>
+                <textarea placeholder="有啥新鲜事和同事聊聊" ng-model="sendText" class="my-drop-zone" nv-file-over="" uploader="uploader"></textarea>
+            </div>
+            <div class="editorCtrl">
+                <a href="" class="pull-left">表情</a>
+                <a href="" class="pull-left">附件</a>
+                <input type="button" value="发布" ng-click="sendMb()" />
             </div>
             <input type="file" nv-file-select="" uploader="uploader" multiple/>
         </div>
-        <div class="col-md-9" style="margin-bottom: 40px">
-            <h3>上传列表</h3>
-
+        <div>
             <p>文件数: {{ uploader.queue.length }}</p>
             <table class="table">
                 <thead>
@@ -62,5 +64,4 @@
                 </tbody>
             </table>
         </div>
-    </div>
 </div>
