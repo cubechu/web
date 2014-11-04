@@ -5,12 +5,12 @@
             </div>
             <div class="editorCtrl">
                 <a href="" class="pull-left">表情</a>
-                <a href="" class="pull-left">附件</a>
+                <a href="" class="pull-left" ng-click="addAttach()">附件</a>
                 <input type="button" value="发布" ng-click="sendMb()" />
             </div>
-            <input type="file" nv-file-select="" uploader="uploader" multiple/>
+            <input type="file" nv-file-select="" uploader="uploader" id="attachBtn" ng-model="attachBtn" class="none" multiple />
         </div>
-        <div>
+        <div ng-hide="fileList">
             <p>文件数: {{ uploader.queue.length }}</p>
             <table class="table">
                 <thead>

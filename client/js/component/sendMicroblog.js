@@ -16,6 +16,12 @@ define(['angular', 'angularFileUpload'], function(ng) {
             url: '/fileUpload'
         });
 
+        $scope.fileList = true;//隐藏上传控件
+
+        $scope.addAttach = function(){//点击上传按钮
+            $("#attachBtn").click();
+        };
+
         // FILTERS
 
         uploader.filters.push({
@@ -32,6 +38,7 @@ define(['angular', 'angularFileUpload'], function(ng) {
         };
         uploader.onAfterAddingFile = function (fileItem) {
             console.info('onAfterAddingFile', fileItem);
+            $scope.fileList = false;
         };
         uploader.onAfterAddingAll = function (addedFileItems) {
             console.info('onAfterAddingAll', addedFileItems);
