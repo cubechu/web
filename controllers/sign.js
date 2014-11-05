@@ -1,6 +1,7 @@
 var passport = require('passport'),
     http = require('http'),
     qs = require('querystring'),
+    config = require('../config/config'),
     LocalStrategy = require('passport-local').Strategy;
 exports.login = function (req, res) {
     passport.use('local', new LocalStrategy(
@@ -12,7 +13,7 @@ exports.login = function (req, res) {
             };
 
             var options = {
-                hostname: '192.168.22.92',
+                hostname: config.restHost,
                 port: 8040,
                 path: '/user/authenticate',
                 method: 'POST',

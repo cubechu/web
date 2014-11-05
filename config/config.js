@@ -2,6 +2,7 @@ module.exports = {
     listenPort: 3006,
     secret: 'cubechu',
     maxAge: 600000,
+    restHost: '192.168.22.92',
     db: 'mongodb://192.168.22.155:27017/myapp',
     github: {
         clientID: "0c2bf039a80e36880b8a",

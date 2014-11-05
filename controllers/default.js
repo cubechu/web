@@ -1,6 +1,7 @@
 var Model = require('../models/index'),
     fs = require('fs'),
     http = require('http'),
+    config = require('../config/config'),
     qs = require('querystring');
 
 //发送消息
@@ -81,7 +82,7 @@ exports.mbList = function (req, res) {
     };
 
     var options = {
-        hostname: '192.168.22.92',
+        hostname: config.restHost,
         port: 8092,
         path: '/statuses/public_timeline/pageIndex?' + qs.stringify(data),
         method: 'GET',
