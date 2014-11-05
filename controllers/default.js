@@ -75,27 +75,28 @@ exports.default = function (req, res) {
 //微博列表
 exports.mbList = function (req, res) {
     //http get
-    /*var data = {
-     networkId: 'ffb41aba-f56e-4ce5-9b64-6ce86d248e63'
-     };
+    var data = {
+        userId: '4e420a24cce7a2ad930fc948',
+        networkIds: '383cee68-cea3-4818-87ae-24fb46e081b1',
+        start: 1,
+        limit: 3
+    };
 
-     var options = {
-     hostname: '172.20.137.142',
-     port: 8080,
-     path: '/space/show?' + qs.stringify(data),
-     method: 'GET'
-     };
+    var options = {
+        hostname: '192.168.22.92',
+        port: 8092,
+        path: '/statuses/public_timeline/start?' + qs.stringify(data),
+        method: 'GET'
+    };
 
-     http.request(options, function (res) {
-     console.log('STATUS: ' + res.statusCode);
-     console.log('HEADERS: ' + JSON.stringify(res.headers));
-     res.setEncoding('utf8');
-     res.on('data', function (chunk) {
-     console.log('BODY: ' + chunk);
-     });
-     }).on('error', function (e) {
-     console.log('problem with request: ' + e.message);
-     }).end();*/
+    http.request(options, function (response) {
+        response.setEncoding('utf8');
+        response.on('data', function (data) {
+            res.send(data);
+        });
+    }).on('error', function (e) {
+        console.log('problem with request: ' + e.message);
+    }).end();
 
     //http post
 
@@ -125,7 +126,7 @@ exports.mbList = function (req, res) {
      console.log('problem with request: ' + e.message);
      }).end(qs.stringify(post_data));*/
 
-    Model.microblog.fetch(req.query.lastsendtime, function (err, microblog) {
+    /*Model.microblog.fetch(req.query.lastsendtime, function (err, microblog) {
         if (err) {
             console.log(err);
         }
@@ -142,7 +143,7 @@ exports.mbList = function (req, res) {
             }
             res.send(microblog);
         });
-    });
+    });*/
 };
 
 exports.fileUpload = function (req, res) {

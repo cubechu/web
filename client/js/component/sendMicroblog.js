@@ -6,6 +6,7 @@ define(['angular', 'angularFileUpload'], function(ng) {
         return {
             restrict: 'EA',
             replace: true,
+            transclude: true,
             templateUrl: '/tpl/sendMicroblog.html',
             controller: 'uploadController'
         }

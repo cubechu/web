@@ -5,21 +5,7 @@ block content
             div.col-md-2
                 include ../includes/left
             div.col-md-8.pub-box
-                ul(class="nav nav-tabs", role="tablist")
-                    li(role="presentation", class="active")
-                        a(show-tab="", href="#mbEditor", role="tab", data-toggle="tab") 微博
-                    li(role="presentation")
-                        a(show-tab="", href="#docEditor", role="tab", data-toggle="tab") 文档
-                div(class="tab-content")
-                    div(role="tabpanel", class="tab-pane fade in active", id="mbEditor", ng-controller="sendMbCtrl")
-                        div(mb-send-microblog)
-                    div(role="tabpanel", id="docEditor", class="tab-pane fade")
-                        a(href="") 上传文档
-
-                ul(ng-controller="mbCtrl")
-                    li(ng-hide="hasNew", ng-click="getLatestMb()", ng-cloak, class="ng-cloak get-latest") 有新微博，点击查看
-                    li(mb-list, ng-repeat="mb in mbList")
-                        div(mb-operation)
-                        div(mb-comment)
+                include ../includes/microblogEditor
+                include ../includes/microblogList
             div.col-md-2
                 span 邀请同事

@@ -75,15 +75,6 @@ define(["angular", "sendMicroblog", "socketFactory"], function (ng) {
         });
     });
 
-    appModule.directive('mbList', function () {
-        return {
-            restrict: 'EA',
-            replace: true,
-            transclude: true,
-            templateUrl: '/tpl/microblogList.html'
-        }
-    });
-
     //回复
     appModule.directive('mbComment', function ($http) {
         return {
@@ -112,14 +103,6 @@ define(["angular", "sendMicroblog", "socketFactory"], function (ng) {
                     });
                 };
             }
-        };
-    });
-
-    appModule.directive('mbOperation', function () {
-        return {
-            restrict: 'EA',
-            replace: true,
-            templateUrl: '/tpl/microblogOperation.html'
         };
     });
 
