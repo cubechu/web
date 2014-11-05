@@ -74,76 +74,32 @@ exports.default = function (req, res) {
 
 //微博列表
 exports.mbList = function (req, res) {
-    //http get
     var data = {
-        userId: '4e420a24cce7a2ad930fc948',
-        networkIds: '383cee68-cea3-4818-87ae-24fb46e081b1',
-        start: 1,
-        limit: 3
+        networkIds: req.session.passport.user.result.defaultNetwork,
+        pageIndex: 1,
+        limit: 1
     };
 
     var options = {
         hostname: '192.168.22.92',
         port: 8092,
-        path: '/statuses/public_timeline/start?' + qs.stringify(data),
-        method: 'GET'
+        path: '/statuses/public_timeline/pageIndex?' + qs.stringify(data),
+        method: 'GET',
+        headers: {
+            'X-Requested-clientId' : 'web',
+            'X-Requested-userId': req.session.passport.user.result.id
+        }
     };
 
     http.request(options, function (response) {
         response.setEncoding('utf8');
         response.on('data', function (data) {
-            res.send(data);
+            console.log('microblogList:' +data);
+            return res.send(data);
         });
     }).on('error', function (e) {
         console.log('problem with request: ' + e.message);
     }).end();
-
-    //http post
-
-    /*var post_data = {
-     currentUserId: '4e420a24cce7a2ad930fc948',
-     name: '吃喝玩乐疯'
-     };
-
-     var options = {
-     hostname: '172.20.137.142',
-     port: 8080,
-     path: '/space/create',
-     method: 'POST',
-     headers: {
-     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-     }
-     };
-
-     http.request(options, function (res) {
-     console.log('STATUS: ' + res.statusCode);
-     console.log('HEADERS: ' + JSON.stringify(res.headers));
-     res.setEncoding('utf8');
-     res.on('data', function (chunk) {
-     console.log('BODY: ' + chunk);
-     });
-     }).on('error', function (e) {
-     console.log('problem with request: ' + e.message);
-     }).end(qs.stringify(post_data));*/
-
-    /*Model.microblog.fetch(req.query.lastsendtime, function (err, microblog) {
-        if (err) {
-            console.log(err);
-        }
-        Model.comments.fetch(function (err, comment) {
-            if (err) {
-                console.log(err);
-            }
-            for (var i = 0; i < microblog.length; i++) {
-                for (var j = 0; j < comment.length; j++) {
-                    if (microblog[i]._id == comment[j].mbId) {
-                        microblog[i]["comment"].push(comment[j]);
-                    }
-                }
-            }
-            res.send(microblog);
-        });
-    });*/
 };
 
 exports.fileUpload = function (req, res) {
