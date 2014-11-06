@@ -2,7 +2,6 @@ var Model = require('../models/index'),
     fs = require('fs'),
     http = require('http'),
     config = require('../config/config'),
-    qs = require('querystring'),
     request = require('./request');
 
 //发送消息
@@ -70,7 +69,7 @@ exports.default = function (req, res) {
     res.render('default', {
         "title": "首页",
         "file": "default",
-        "userName": req.user.username
+        "userName": req.session.passport.user.result.name
     });
 };
 
@@ -86,7 +85,7 @@ exports.msgList = function (req, res) {
         path: '/statuses/public_timeline/pageIndex',
         userId: req.session.passport.user.result.id,
         s: function (data) {
-            console.log('microblogList:' +data);
+            console.log('msgList:' +data);
             return res.send(data);
         }
     });

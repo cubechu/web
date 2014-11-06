@@ -17,7 +17,7 @@ exports.login = function (req, res) {
                 userId: '',
                 s: function (data) {
                     var user = JSON.parse(data);
-                    console.log('login: ' + user);
+                    console.log('user: ' + data);
                     if (!user.success) {
                         return done(null, false, { message: 'Incorrect username.' });
                     }
