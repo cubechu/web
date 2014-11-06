@@ -2,7 +2,8 @@ var Model = require('../models/index'),
     fs = require('fs'),
     http = require('http'),
     config = require('../config/config'),
-    qs = require('querystring');
+    qs = require('querystring'),
+    request = require('./request');
 
 //发送消息
 exports.sendMb = function (req, res) {
@@ -75,32 +76,20 @@ exports.default = function (req, res) {
 
 //微博列表
 exports.mbList = function (req, res) {
-    var data = {
-        networkIds: req.session.passport.user.result.defaultNetwork,
-        pageIndex: 1,
-        limit: 1
-    };
-
-    var options = {
-        hostname: config.restHost,
-        port: 8092,
-        path: '/statuses/public_timeline/pageIndex?' + qs.stringify(data),
-        method: 'GET',
-        headers: {
-            'X-Requested-clientId' : 'web',
-            'X-Requested-userId': req.session.passport.user.result.id
-        }
-    };
-
-    http.request(options, function (response) {
-        response.setEncoding('utf8');
-        response.on('data', function (data) {
+    request.get({
+        data: {
+            networkIds: req.session.passport.user.result.defaultNetwork,
+            pageIndex: 1,
+            limit: 1
+        },
+        port: config.mbListPort,
+        path: '/statuses/public_timeline/pageIndex',
+        userId: req.session.passport.user.result.id,
+        s: function (data) {
             console.log('microblogList:' +data);
             return res.send(data);
-        });
-    }).on('error', function (e) {
-        console.log('problem with request: ' + e.message);
-    }).end();
+        }
+    });
 };
 
 exports.fileUpload = function (req, res) {

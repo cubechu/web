@@ -2,9 +2,9 @@ extends ../signLayout
 block content
     .container
         form(action="/login", method="post", class="form-signin")
-            h2(class="form-signin-heading") Please sign in
+            h2(class="form-signin-heading") 用户登录
             input(type="text", name="username", placeholder="用户名", class="form-control")
             input(type="password", name="password", placeholder="密码", class="form-control")
             input(type="submit", value="login", class="btn btn-lg btn-primary btn-block")
-            a(href="/auth/github") Github Login
+            a(href="/auth/github") Github 登录
 
