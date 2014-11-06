@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var microblogSchema = new mongoose.Schema({
+var msgSchema = new mongoose.Schema({
     userId: {type: String},
     userName: {type: String},
     avatar: {type: String},
@@ -8,14 +8,14 @@ var microblogSchema = new mongoose.Schema({
     sendTime: {type: Date, default: Date.now()}
 });
 
-microblogSchema.statics = {
-    fetch: function (lastMbSendTime, cb) {
+msgSchema.statics = {
+    fetch: function (lastMsgSendTime, cb) {
         var obj = {};
-        if (lastMbSendTime) {
-            obj = {sendTime: {$gt: lastMbSendTime}};
+        if (lastMsgSendTime) {
+            obj = {sendTime: {$gt: lastMsgSendTime}};
         }
         return this.find(obj).sort({'sendTime': 'desc'}).exec(cb);
     }
 };
 
-module.exports = microblogSchema;
+module.exports = msgSchema;

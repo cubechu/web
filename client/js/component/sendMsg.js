@@ -1,13 +1,13 @@
 define(['angular', 'angularFileUpload'], function(ng) {
 
-    var appModule = ng.module('sendMicroblogComponent', ['angularFileUpload']);
+    var appModule = ng.module('sendMsgComponent', ['angularFileUpload']);
 
-    appModule.directive('mbSendMicroblog', function () {
+    appModule.directive('dSendMsg', function () {
         return {
             restrict: 'EA',
             replace: true,
             transclude: true,
-            templateUrl: '/tpl/sendMicroblog.html',
+            templateUrl: '/tpl/sendMsg.html',
             controller: 'uploadController'
         }
     });

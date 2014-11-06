@@ -4,28 +4,28 @@ var config = require('./config/config'),
     passport = require('passport');
 
 module.exports = function (app) {
-    app.get('/', sign.login);
+    app.get('/login', sign.login);
     app.post('/login',
         passport.authenticate('local', {
-            successRedirect: '/default',
-            failureRedirect: '/'
+            successRedirect: '/',
+            failureRedirect: '/login'
         }));
 
     //default页面
-    app.all('/default', isLoggedIn);
-    app.get('/default', def.default);
+    app.all('/', isLoggedIn);
+    app.get('/', def.default);
     app.get('/default/:userId/admin', def.admin);//用户类型判断
     app.get('/logout', function (req, res) {
         req.logout();
-        res.redirect('/');
+        res.redirect('/login');
     });
 
     //微博列表
-    app.get('/mbList', def.mbList);
+    app.get('/msgList', def.msgList);
 
     //发送消息
-    app.all('/sendMb', isLoggedIn);
-    app.post('/sendMb', def.sendMb);
+    app.all('/sendMsg', isLoggedIn);
+    app.post('/sendMsg', def.sendMsg);
 
     //发送回复
     app.all('/sendCmt', isLoggedIn);
@@ -48,5 +48,5 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
 
-    res.redirect('/');
+    res.redirect('/login');
 }

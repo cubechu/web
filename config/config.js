@@ -3,7 +3,7 @@ module.exports = {
     secret: 'cubechu',
     maxAge: 600000,
     restHost: '192.168.22.92',
-    mbListPort: 8092,
+    msgListPort: 8092,
     loginPort: 8040,
     db: 'mongodb://192.168.22.155:27017/myapp',
     github: {

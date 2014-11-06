@@ -1,0 +1,12 @@
+ul(ng-controller="msgCtrl")
+    li(ng-hide="hasNew", ng-click="getLatestMsg()", ng-cloak, class="ng-cloak get-latest") 有新微博，点击查看
+    li(id="{{msg.id}}", ng-cloak, class="ng-cloak msg-list", ng-repeat="msg in msgList track by $index")
+        a(class="avatar", ng-href="/{{msg.ownerId}}")
+            img(ng-src="http://192.168.22.92/space/c/photo/load?id={{msg.ownerPhotoId}}")
+        div
+            a(ng-href="/{{msg.ownerId}}", ng-bind="msg.ownerName")
+            p(ng-bind="msg.content")
+        div
+            a(href="", class="like") 赞
+            a(href="", class="cmt-btn", ng-click="cmtToggle()") 回复
+        div(d-cmt)

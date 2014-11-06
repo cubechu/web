@@ -1,12 +1,12 @@
 <div>
     <div ng-show="showMe" class="cmt-editor">
         <textarea class="cmt-input" ng-model="sentText"></textarea>
-        <p><input type="button" value="回复" ng-click="sendCmt(mb)"/></p>
+        <p><input type="button" value="回复" ng-click="sendCmt(msg)"/></p>
     </div>
 
     <div class="cmtList">
         <ul>
-            <li class="cmt" ng-repeat="cmt in mb.comments">
+            <li class="cmt" ng-repeat="cmt in msg.comments">
                 <a ng-href="/{{cmt.cmtUserId}}" class="avatar">
                     <img ng-src="{{cmt.cmtUserAvatar}}"/>
                 </a>

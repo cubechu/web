@@ -6,7 +6,7 @@ var Model = require('../models/index'),
     request = require('./request');
 
 //发送消息
-exports.sendMb = function (req, res) {
+exports.sendMsg = function (req, res) {
     res.setHeader('Content-Type', 'application/json;charset=utf-8');
     var modelObj = req.body;
     var _model = new Model.microblog({
@@ -75,14 +75,14 @@ exports.default = function (req, res) {
 };
 
 //微博列表
-exports.mbList = function (req, res) {
+exports.msgList = function (req, res) {
     request.get({
         data: {
             networkIds: req.session.passport.user.result.defaultNetwork,
             pageIndex: 1,
             limit: 1
         },
-        port: config.mbListPort,
+        port: config.msgListPort,
         path: '/statuses/public_timeline/pageIndex',
         userId: req.session.passport.user.result.id,
         s: function (data) {

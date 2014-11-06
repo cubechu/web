@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var config = require('../config/config');
-var microblogSchema = require('./microblog');
-var commentSchema = require('./comment');
+var msgSchema = require('./msg');
+var cmtSchema = require('./cmt');
 
 mongoose.connect(config.db, function (err) {
     if (err) {
@@ -10,5 +10,5 @@ mongoose.connect(config.db, function (err) {
     }
 });
 
-exports.microblog = mongoose.model('microblog', microblogSchema);
-exports.comments = mongoose.model('comment', commentSchema);
+exports.microblog = mongoose.model('msg', msgSchema);
+exports.comments = mongoose.model('cmt', cmtSchema);
