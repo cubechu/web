@@ -1,7 +1,5 @@
 <div nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
-    <div>
-        <div ng-transclude></div>
-    </div>
+    <div ng-transclude></div>
     <div ng-hide="fileList">
         <p>文件数: {{ uploader.queue.length }}</p>
         <table class="table">

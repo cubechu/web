@@ -7,7 +7,7 @@ div(class="tab-content")
     div(role="tabpanel", class="tab-pane fade in active", id="msgEditor", ng-controller="sendMsgCtrl")
         div(d-send-msg)
             div(ng-show="uploader.isHTML5")
-                textarea(placeholder="有啥新鲜事和同事聊聊", ng-model="sendText", class="my-drop-zone", nv-file-over="", uploader="uploader")
+                textarea(placeholder="有啥新鲜事和同事聊聊", ng-model="$parent.sendText", class="my-drop-zone", nv-file-over="", uploader="uploader")
             div(class="editorCtrl")
                 a(href="", class="pull-left") 表情
                 a(href="", class="pull-left", ng-click="addAttach()") 附件

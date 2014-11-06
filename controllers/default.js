@@ -6,28 +6,19 @@ var Model = require('../models/index'),
 
 //发送消息
 exports.sendMsg = function (req, res) {
-    res.setHeader('Content-Type', 'application/json;charset=utf-8');
-    var modelObj = req.body;
-    var _model = new Model.microblog({
-        userId: req.session.passport.user.id,
-        userName: req.session.passport.user.username,
-        avatar: req.session.passport.user.avatar ? req.session.passport.user.avatar : JSON.parse(req.session.passport.user._raw).avatar_url,
-        content: modelObj.content,
-        sendTime: modelObj.sendTime
-    });
-    _model.save(function (err, model) {
-        if (err) {
-            console.log(err);
+    request.post({
+        data: {
+            status: req.body.content,
+            fileids: '',
+            networId: req.session.passport.user.result.defaultNetwork
+        },
+        port: config.msgListPort,
+        path: '/statuses/update',
+        userId: req.session.passport.user.result.id,
+        s: function (data) {
+            console.log('sendMsg:' + data);
+            return res.send(data);
         }
-        res.send({
-            "success": "true",
-            "_id": model._id,
-            "userId": model.userId,
-            "userName": model.userName,
-            "avatar": model.avatar,
-            "content": model.content,
-            "sendTime": model.sendTime
-        });
     });
 };
 
@@ -85,7 +76,7 @@ exports.msgList = function (req, res) {
         path: '/statuses/public_timeline/pageIndex',
         userId: req.session.passport.user.result.id,
         s: function (data) {
-            console.log('msgList:' +data);
+            console.log('msgList:' + data);
             return res.send(data);
         }
     });

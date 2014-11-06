@@ -26,8 +26,8 @@ define(["angular", "sendMsg", "socketFactory"], function (ng) {
                 method: 'post',
                 url: '/sendMsg',
                 data: {
-                    "content": $scope.sendText,
-                    "sendTime": Date.now()
+                    'content': $scope.sendText,
+                    'fileids': ''
                 }
             }).success(function (req) {
                 $scope.sendText = '';
@@ -71,6 +71,7 @@ define(["angular", "sendMsg", "socketFactory"], function (ng) {
             method: 'get',
             url: '/msgList'
         }).success(function (req) {
+            console.log(req);
             $scope.msgList = req;
         });
     });

@@ -9,7 +9,7 @@ module.exports = {
             path: obj.path + '?' + qs.stringify(obj.data),
             method: 'GET',
             headers: {
-                'X-Requested-clientId': 'web',
+                'X-Requested-clientId': config.clientId,
                 'X-Requested-userId': obj.userId
             }
         };
@@ -30,7 +30,7 @@ module.exports = {
             path: obj.path,
             method: 'POST',
             headers: {
-                'X-Requested-clientId': 'web',
+                'X-Requested-clientId': config.clientId,
                 'X-Requested-userId': obj.userId
             }
         };
