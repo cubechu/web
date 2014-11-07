@@ -21,6 +21,9 @@ define(["angular", "sendMsg", "socketFactory"], function (ng) {
 
     //发送消息
     appModule.controller('sendMsgCtrl', function ($scope, $http, socket) {
+        $scope.addAttach = function () {//点击上传按钮
+            $("#attachBtn").click();
+        };
         $scope.sendMsg = function () {
             $http({
                 method: 'post',

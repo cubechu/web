@@ -2,12 +2,11 @@ define(['angular', 'angularFileUpload'], function(ng) {
 
     var appModule = ng.module('sendMsgComponent', ['angularFileUpload']);
 
-    appModule.directive('dSendMsg', function () {
+    appModule.directive('dFileUpload', function () {
         return {
             restrict: 'EA',
             replace: true,
-            transclude: true,
-            templateUrl: '/tpl/sendMsg.html',
+            templateUrl: '/tpl/fileUpload.html',
             controller: 'uploadController'
         }
     });
@@ -18,10 +17,6 @@ define(['angular', 'angularFileUpload'], function(ng) {
         });
 
         $scope.fileList = true;//隐藏上传控件
-
-        $scope.addAttach = function(){//点击上传按钮
-            $("#attachBtn").click();
-        };
 
         // FILTERS
 

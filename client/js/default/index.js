@@ -6,7 +6,7 @@ require.config({
         "angularFileUpload": "/js/public/angular-file-upload.min",
         "app": "/js/default/default",
         "io": "/socket.io/socket.io",
-        "sendMsg": "/js/component/sendMsg",
+        "fileUpload": "/js/component/fileUpload",
         "socketFactory": "/js/component/socketFactory"
     },
     shim: {
