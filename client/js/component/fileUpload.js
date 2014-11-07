@@ -1,6 +1,6 @@
 define(['angular', 'angularFileUpload'], function(ng) {
 
-    var appModule = ng.module('sendMsgComponent', ['angularFileUpload']);
+    var appModule = ng.module('fileUploadComponent', ['angularFileUpload']);
 
     appModule.directive('dFileUpload', function () {
         return {

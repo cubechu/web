@@ -1,6 +1,6 @@
-define(["angular", "sendMsg", "socketFactory"], function (ng) {
+define(["angular", "fileUpload", "socketFactory"], function (ng) {
 
-    var appModule = ng.module('app', ['sendMsgComponent', 'socketComponent']);
+    var appModule = ng.module('app', ['fileUploadComponent', 'socketComponent']);
 
     appModule.controller('wrapCtrl', function ($scope) {
         $scope.$on("msgChange", function (event, msg) {
