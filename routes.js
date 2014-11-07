@@ -21,6 +21,7 @@ module.exports = function (app) {
     });
 
     //微博列表
+    app.all('/msgList', isLoggedIn);
     app.get('/msgList', def.msgList);
 
     //发送消息

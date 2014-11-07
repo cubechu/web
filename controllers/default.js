@@ -70,7 +70,7 @@ exports.msgList = function (req, res) {
         data: {
             networkIds: req.session.passport.user.result.defaultNetwork,
             pageIndex: 1,
-            limit: 1
+            limit: 20
         },
         port: config.msgListPort,
         path: '/statuses/public_timeline/pageIndex',

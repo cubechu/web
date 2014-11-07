@@ -4,19 +4,22 @@ var http = require('http'),
 module.exports = {
     get: function (obj) {
         var options = {
-            hostname: config.restHost,
-            port: obj.port,
-            path: obj.path + '?' + qs.stringify(obj.data),
-            method: 'GET',
-            headers: {
-                'X-Requested-clientId': config.clientId,
-                'X-Requested-userId': obj.userId
-            }
-        };
+                hostname: config.restHost,
+                port: obj.port,
+                path: obj.path + '?' + qs.stringify(obj.data),
+                method: 'GET',
+                headers: {
+                    'X-Requested-clientId': config.clientId,
+                    'X-Requested-userId': obj.userId
+                }
+            };
         http.request(options, function (response) {
+            var body = '';
             response.setEncoding('utf8');
             response.on('data', function (data) {
-                obj.s(data);
+                body += data;
+            }).on('end', function () {
+                obj.s(body);
             });
         }).on('error', function (e) {
             console.log('problem with request: ' + e.message);

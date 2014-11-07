@@ -71,7 +71,6 @@ define(["angular", "sendMsg", "socketFactory"], function (ng) {
             method: 'get',
             url: '/msgList'
         }).success(function (req) {
-            console.log(req);
             $scope.msgList = req;
         });
     });
