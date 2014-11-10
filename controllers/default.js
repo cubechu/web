@@ -69,14 +69,14 @@ exports.msgList = function (req, res) {
     request({
         data: {
             networkIds: req.session.passport.user.result.defaultNetwork,
-            pageIndex: 1,
-            limit: 20
+            pageIndex: req.body.pageIndex,
+            limit: config.msgListLimit
         },
         port: config.msgListPort,
         path: '/statuses/public_timeline/pageIndex',
         userId: req.session.passport.user.result.id
     }).then(function (data) {
-        console.log('request: ' + data);
+        console.log('msgList: ' + data);
         res.send(data);
     });
 };

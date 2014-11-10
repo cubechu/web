@@ -23,8 +23,9 @@ module.exports = function (obj) {
             deferred.resolve(Buffer.concat(chunks, size).toString());
         });
     });
-    req.on('error', function (e) {
-        console.log('problem with request: ' + e.message);
+    req.on('error', function (err) {
+        console.log('problem with request: ' + err.message);
+        deferred.reject(err.message);
     });
     if (obj.method == 'POST') {
         req.write(qs.stringify(obj.data));

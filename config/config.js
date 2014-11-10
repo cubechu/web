@@ -6,6 +6,7 @@ module.exports = {
     msgListPort: 8092,
     loginPort: 8040,
     clientId: 'vISgM2Na7k3NLHIf',
+    msgListLimit: 20,
     db: 'mongodb://192.168.22.155:27017/myapp',
     github: {
         clientID: "0c2bf039a80e36880b8a",

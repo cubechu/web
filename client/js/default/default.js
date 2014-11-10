@@ -72,7 +72,10 @@ define(["angular", "fileUpload", "socketFactory"], function (ng) {
         });
         $http({
             method: 'get',
-            url: '/msgList'
+            url: '/msgList',
+            data: {
+                pageIndex: 1
+            }
         }).success(function (req) {
             $scope.msgList = req;
         });
