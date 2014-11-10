@@ -6,7 +6,7 @@ var Model = require('../models/index'),
 
 //发送消息
 exports.sendMsg = function (req, res) {
-    request.req({
+    request({
         data: {
             status: req.body.content,
             fileids: '',
@@ -16,6 +16,9 @@ exports.sendMsg = function (req, res) {
         path: '/statuses/update',
         userId: req.session.passport.user.result.id,
         method: 'POST'
+    }).then(function (data) {
+        console.log('sendMsg: ' + data);
+        return res.send(data);
     });
 };
 
@@ -63,7 +66,7 @@ exports.default = function (req, res) {
 
 //微博列表
 exports.msgList = function (req, res) {
-    request.req({
+    request({
         data: {
             networkIds: req.session.passport.user.result.defaultNetwork,
             pageIndex: 1,
@@ -72,8 +75,8 @@ exports.msgList = function (req, res) {
         port: config.msgListPort,
         path: '/statuses/public_timeline/pageIndex',
         userId: req.session.passport.user.result.id
-    }).then(function(data){
-        console.log('req' + data);
+    }).then(function (data) {
+        console.log('request: ' + data);
         res.send(data);
     });
 };

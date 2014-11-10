@@ -7,7 +7,7 @@ var passport = require('passport'),
 exports.login = function (req, res) {
     passport.use('local', new LocalStrategy(
         function (username, password, done) {
-            request.req({
+            request({
                 data: {
                     accountName: username,
                     password: password
