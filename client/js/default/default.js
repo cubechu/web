@@ -1,6 +1,6 @@
-define(["angular", "fileUpload", "socketFactory"], function (ng) {
+define(["angular", "fileUpload", "socketFactory", "scroll"], function (ng) {
 
-    var appModule = ng.module('app', ['fileUploadComponent', 'socketComponent']);
+    var appModule = ng.module('app', ['fileUploadComponent', 'socketComponent', 'infinite-scroll']);
 
     appModule.controller('wrapCtrl', function ($scope) {
         $scope.$on("msgChange", function (event, msg) {
@@ -70,15 +70,32 @@ define(["angular", "fileUpload", "socketFactory"], function (ng) {
                 }
             }
         });
-        $http({
-            method: 'get',
-            url: '/msgList',
-            data: {
-                pageIndex: 1
-            }
-        }).success(function (req) {
-            $scope.msgList = req;
-        });
+        //滚动到底部获取数据
+        var page = 1;
+        $scope.hasData = false;
+        $scope.loadMore = function () {
+            if ($scope.hasData) return;
+            $scope.hasData = true;
+            $http({
+                method: 'get',
+                url: '/msgList',
+                params: {
+                    pageIndex: page
+                }
+            }).success(function (req) {
+                if (page === 1) {
+                    $scope.msgList = req;
+                } else {
+                    $scope.msgList.concat(req);
+                }
+                $scope.hasData = false;
+                if (req.length === 0) {
+                    $scope.hasData = true;
+                } else {
+                    page++;
+                }
+            });
+        };
     });
 
     //回复

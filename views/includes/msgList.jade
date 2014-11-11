@@ -1,4 +1,4 @@
-ul(ng-controller="msgCtrl")
+ul(ng-controller="msgCtrl",infinite-scroll="loadMore()",infinite-scroll-disabled='{{hasData}}', infinite-scroll-distance="1")
     li(ng-hide="hasNew", ng-click="getLatestMsg()", ng-cloak, class="ng-cloak get-latest") 有新微博，点击查看
     li(id="{{msg.id}}", ng-cloak, class="ng-cloak msg-list", ng-repeat="msg in msgList track by $index")
         a(class="avatar", ng-href="/{{msg.ownerId}}")

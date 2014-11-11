@@ -66,10 +66,11 @@ exports.default = function (req, res) {
 
 //微博列表
 exports.msgList = function (req, res) {
+    console.log('page:   '+req.query.pageIndex);
     request({
         data: {
             networkIds: req.session.passport.user.result.defaultNetwork,
-            pageIndex: req.body.pageIndex,
+            pageIndex: req.query.pageIndex,
             limit: config.msgListLimit
         },
         port: config.msgListPort,
