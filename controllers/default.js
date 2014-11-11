@@ -83,6 +83,11 @@ exports.msgList = function (req, res) {
     });
 };
 
+//上传
+exports.fileUpload = function(req, res){
+    console.log(req.files);
+};
+
 //用户类型判断
 exports.admin = function (req, res) {
     res.end(req.params.userId);

@@ -15,7 +15,7 @@ app.set('view engine', 'jade');
 app.use(connectDomain());
 app.use(express.favicon());
 app.use(express.logger('dev'));
-app.use(express.bodyParser({}));
+app.use(express.bodyParser({uploadDir: './uploads'}));
 app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(express.session({secret: config.secret, cookie: { maxAge: config.maxAge }}));
