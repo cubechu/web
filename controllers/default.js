@@ -10,11 +10,12 @@ exports.sendMsg = function (req, res) {
         data: {
             status: req.body.content,
             fileids: '',
-            networId: req.session.passport.user.result.defaultNetwork
+            networkIds: req.session.passport.user.result.defaultNetwork
         },
         port: config.msgListPort,
         path: '/statuses/update',
         userId: req.session.passport.user.result.id,
+        networkId: req.session.passport.user.result.defaultNetwork,
         method: 'POST'
     }).then(function (data) {
         console.log('sendMsg: ' + data);
@@ -74,30 +75,12 @@ exports.msgList = function (req, res) {
         },
         port: config.msgListPort,
         path: '/statuses/public_timeline/pageIndex',
-        userId: req.session.passport.user.result.id
+        userId: req.session.passport.user.result.id,
+        networkId: req.session.passport.user.result.defaultNetwork
     }).then(function (data) {
         console.log('msgList: ' + data);
         res.send(data);
     });
-};
-
-exports.fileUpload = function (req, res) {
-    console.log(req.files);
-    /*if (req.files && req.files.thumbnail != 'undifined') {
-
-     */
-    /*
-     var temp_path = req.files.thumbnail.path;
-     if (temp_path) {
-     fs.readFile(temp_path, 'utf-8', function (err, content) {
-     //文件的内容
-     console.log('content', content);
-     // 删除临时文件
-     fs.unlink(temp_path);
-     });
-     }*/
-    /*
-     }*/
 };
 
 //用户类型判断

@@ -10,7 +10,8 @@ module.exports = function (obj) {
         method: obj.method || 'GET',
         headers: {
             'X-Requested-clientId': config.clientId,
-            'X-Requested-userId': obj.userId
+            'X-Requested-userId': obj.userId,
+            'X-Requested-networkId': obj.networkId
         }
     };
     var deferred = new Deferred();
