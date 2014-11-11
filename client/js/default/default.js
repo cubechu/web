@@ -86,7 +86,7 @@ define(["angular", "socketFactory", "scroll"], function (ng) {
                 if (page === 1) {
                     $scope.msgList = req;
                 } else {
-                    $scope.msgList.concat(req);
+                    $scope.msgList = $scope.msgList.concat(req);
                 }
                 $scope.hasData = false;
                 if (req.length === 0) {
