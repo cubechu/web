@@ -1,11 +1,14 @@
 <div>
     <div ng-show="showMe" class="cmt-editor">
         <textarea class="cmt-input" ng-model="sentText"></textarea>
+
         <p><input type="button" value="回复" ng-click="sendCmt(msg, $index)"/></p>
     </div>
 
     <div class="cmtList">
         <ul>
+            <li ng-show="msg.commentNumber - 2 > 0"><a href="" ng-click="showComment(msg, $index)">还有<span ng-bind="msg.commentNumber - 2"></span>条较早的回复</a>
+            </li>
             <li class="cmt" ng-repeat="cmt in msg.comments">
                 <a ng-href="/{{cmt.ownerId}}" class="avatar">
                     <img ng-src="http://192.168.22.92/space/c/photo/load?id={{cmt.ownerPhotoId}}"/>

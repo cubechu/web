@@ -31,6 +31,7 @@ module.exports = function (app) {
     //发送回复
     app.all('/sendCmt', isLoggedIn);
     app.post('/sendCmt', def.sendCmt);
+    app.get('/getCmt', def.getCmt);
 
     //github登录
     app.all('/github', isLoggedIn);

@@ -40,6 +40,24 @@ exports.sendCmt = function (req, res) {
     });
 };
 
+exports.getCmt = function (req, res) {
+    request({
+        data: {
+            microBlogId: req.query.msgId,
+            start: req.query.start,
+            limit: req.query.limit
+        },
+        port: config.msgListPort,
+        path: '/comments/show',
+        userId: req.session.passport.user.result.id,
+        networkId: req.session.passport.user.result.defaultNetwork,
+        method: 'GET'
+    }).then(function (data) {
+        console.log('getCmt: ' + data);
+        return res.send(data);
+    });
+};
+
 //显示基本页面结构
 exports.default = function (req, res) {
     res.render('default', {

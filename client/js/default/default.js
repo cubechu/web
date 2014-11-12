@@ -61,12 +61,12 @@ define(["angular", "fileUpload", "socketFactory", "scroll"], function (ng) {
         $scope.$on("changeFromParent", function (event, msg) {
             $scope.msgList.unshift(msg.microblog);
         });
-        $scope.$on("cmtChange", function (event, msg) {
-            var comments = $scope.msgList[msg.index].comments;
+        $scope.$on("cmtChange", function (event, cmt) {
+            var comments = $scope.msgList[cmt.index].comments;
             if (comments) {
-                comments.unshift(msg);
-            } else{
-                comments = [msg];
+                $scope.msgList[cmt.index].comments = cmt.content.reverse().concat(comments);
+            } else {
+                $scope.msgList[cmt.index].comments = cmt.content;
             }
         });
         //滚动到底部获取数据
@@ -117,8 +117,30 @@ define(["angular", "fileUpload", "socketFactory", "scroll"], function (ng) {
                         }
                     }).success(function (req) {
                         scope.sentText = '';
+                        var cmt = {
+                            index: index,
+                            comment: [req]
+                        };
+                        scope.$emit("cmtChange", cmt);
+                    });
+                };
+                scope.showComment = function (msg, index) {
+                    $http({
+                        method: 'get',
+                        url: '/getCmt',
+                        params: {
+                            msgId: msg.id,
+                            start: 2,
+                            limit: msg.commentNumber - 2
+                        }
+                    }).success(function (req) {
+                        console.log(req);
+                        var cmt = {
+                            index: index,
+                            content: req
+                        };
                         req.index = index;
-                        scope.$emit("cmtChange", req);
+                        scope.$emit("cmtChange", cmt);
                     });
                 };
             }
