@@ -64,7 +64,7 @@ define(["angular", "fileUpload", "socketFactory", "scroll"], function (ng) {
         $scope.$on("cmtChange", function (event, cmt) {
             var comments = $scope.msgList[cmt.index].comments;
             if (comments) {
-                $scope.msgList[cmt.index].comments = cmt.content.reverse().concat(comments);
+                $scope.msgList[cmt.index].comments = cmt.isAdd ? comments.concat(cmt.content) : cmt.content.reverse().concat(comments);
             } else {
                 $scope.msgList[cmt.index].comments = cmt.content;
             }
@@ -119,7 +119,8 @@ define(["angular", "fileUpload", "socketFactory", "scroll"], function (ng) {
                         scope.sentText = '';
                         var cmt = {
                             index: index,
-                            comment: [req]
+                            content: [req],
+                            isAdd: true
                         };
                         scope.$emit("cmtChange", cmt);
                     });
@@ -134,13 +135,13 @@ define(["angular", "fileUpload", "socketFactory", "scroll"], function (ng) {
                             limit: msg.commentNumber - 2
                         }
                     }).success(function (req) {
-                        console.log(req);
                         var cmt = {
                             index: index,
                             content: req
                         };
                         req.index = index;
                         scope.$emit("cmtChange", cmt);
+                        scope.added = true;
                     });
                 };
             }
