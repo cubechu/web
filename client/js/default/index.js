@@ -10,6 +10,7 @@ require.config({
         "socketFactory": "/js/component/socketFactory",
         "scroll": "/js/public/ng-infinite-scroll.min"
     },
+    waitSeconds: 200,
     shim: {
         "angular": {
             exports: "angular"

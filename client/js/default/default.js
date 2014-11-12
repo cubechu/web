@@ -59,15 +59,14 @@ define(["angular", "fileUpload", "socketFactory", "scroll"], function (ng) {
             });
         };
         $scope.$on("changeFromParent", function (event, msg) {
-            $scope.msgList.unshift(msg);
+            $scope.msgList.unshift(msg.microblog);
         });
         $scope.$on("cmtChange", function (event, msg) {
-            for (var i = 0; i < $scope.msgList.length; i++) {
-                if ($scope.msgList[i]._id == msg.msgId && $scope.msgList[i].comment) {
-                    $scope.msgList[i].comment.unshift(msg);
-                } else if ($scope.msgList[i]._id == msg.msgId && !$scope.msgList[i].comment) {
-                    $scope.msgList[i].comment = [msg];
-                }
+            var comments = $scope.msgList[msg.index].comments;
+            if (comments) {
+                comments.unshift(msg);
+            } else{
+                comments = [msg];
             }
         });
         //滚动到底部获取数据
@@ -91,9 +90,8 @@ define(["angular", "fileUpload", "socketFactory", "scroll"], function (ng) {
                 $scope.hasData = false;
                 if (req.length === 0) {
                     $scope.hasData = true;
-                } else {
-                    page++;
                 }
+                page++;
             });
         };
     });
@@ -109,19 +107,17 @@ define(["angular", "fileUpload", "socketFactory", "scroll"], function (ng) {
                 scope.cmtToggle = function () {
                     scope.showMe = !scope.showMe;
                 };
-                scope.sendCmt = function (msg) {
+                scope.sendCmt = function (msg, index) {
                     $http({
                         method: 'post',
                         url: '/sendCmt',
                         data: {
-                            receiverId: msg.userId,
-                            receiverName: msg.userName,
-                            content: scope.sentText,
-                            msgId: msg._id,
-                            sendTime: Date.now()
+                            comment: scope.sentText,
+                            msgId: msg.id
                         }
                     }).success(function (req) {
                         scope.sentText = '';
+                        req.index = index;
                         scope.$emit("cmtChange", req);
                     });
                 };

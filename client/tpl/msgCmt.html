@@ -1,18 +1,18 @@
 <div>
     <div ng-show="showMe" class="cmt-editor">
         <textarea class="cmt-input" ng-model="sentText"></textarea>
-        <p><input type="button" value="回复" ng-click="sendCmt(msg)"/></p>
+        <p><input type="button" value="回复" ng-click="sendCmt(msg, $index)"/></p>
     </div>
 
     <div class="cmtList">
         <ul>
             <li class="cmt" ng-repeat="cmt in msg.comments">
-                <a ng-href="/{{cmt.cmtUserId}}" class="avatar">
-                    <img ng-src="{{cmt.cmtUserAvatar}}"/>
+                <a ng-href="/{{cmt.ownerId}}" class="avatar">
+                    <img ng-src="http://192.168.22.92/space/c/photo/load?id={{cmt.ownerPhotoId}}"/>
                 </a>
 
                 <div>
-                    <a ng-href="/{{cmt.cmtUserId}}" ng-bind="cmt.cmtUserName"></a>
+                    <a ng-href="/{{cmt.ownerId}}" ng-bind="cmt.ownerName"></a>
                     <span ng-bind="cmt.content"></span>
                 </div>
             </li>

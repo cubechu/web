@@ -1,5 +1,4 @@
 var Model = require('../models/index'),
-    fs = require('fs'),
     http = require('http'),
     config = require('../config/config'),
     request = require('./request');
@@ -8,7 +7,7 @@ var Model = require('../models/index'),
 exports.sendMsg = function (req, res) {
     request({
         data: {
-            status: req.body.content,
+            content: req.body.content,
             fileids: '',
             networkIds: req.session.passport.user.result.defaultNetwork
         },
@@ -25,34 +24,19 @@ exports.sendMsg = function (req, res) {
 
 //发送回复
 exports.sendCmt = function (req, res) {
-    res.setHeader('Content-Type', 'application/json;charset=utf-8');
-    var modelObj = req.body;
-    var _model = new Model.comments({
-        receiverId: modelObj.receiverId,
-        receiverName: modelObj.receiverName,
-        cmtUserId: req.session.passport.user.id,
-        cmtUserName: req.session.passport.user.username,
-        cmtUserAvatar: req.session.passport.user.avatar ? req.session.passport.user.avatar : JSON.parse(req.session.passport.user._raw).avatar_url,
-        content: modelObj.content,
-        mbId: modelObj.mbId,
-        sendTime: modelObj.sendTime
-    });
-    _model.save(function (err, model) {
-        if (err) {
-            console.log(err);
-        }
-        res.send({
-            "success": "true",
-            "_id": model._id,
-            "receiverId": model.receiverId,
-            "receiverName": model.receiverName,
-            "cmtUserId": model.cmtUserId,
-            "cmtUserName": model.cmtUserName,
-            "cmtUserAvatar": model.cmtUserAvatar,
-            "content": model.content,
-            "mbId": model.mbId,
-            "sendTime": model.sendTime
-        });
+    request({
+        data: {
+            microBlogId: req.body.msgId,
+            comment: req.body.comment
+        },
+        port: config.msgListPort,
+        path: '/comments/create',
+        userId: req.session.passport.user.result.id,
+        networkId: req.session.passport.user.result.defaultNetwork,
+        method: 'POST'
+    }).then(function (data) {
+        console.log('sendMsg: ' + data);
+        return res.send(data);
     });
 };
 
@@ -84,7 +68,7 @@ exports.msgList = function (req, res) {
 };
 
 //上传
-exports.fileUpload = function(req, res){
+exports.fileUpload = function (req, res) {
     console.log(req.files);
 };
 
