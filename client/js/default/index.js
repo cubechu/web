@@ -8,17 +8,20 @@ require.config({
         "io": "/socket.io/socket.io",
         "fileUpload": "/js/component/fileUpload",
         "socketFactory": "/js/component/socketFactory",
-        "scroll": "/js/public/ng-infinite-scroll.min"
+        "scroll": "/js/public/ng-infinite-scroll"
     },
-    waitSeconds: 200,
     shim: {
         "angular": {
             exports: "angular"
+        },
+        "bootStrap": {
+            deps: ["jquery"],
+            exports: "bootStrap"
         }
     }
 });
-require(["app", "jquery", "angular", "bootStrap"], function (app, $, angular) {
-    angular.element('document').ready(function(){
+require(["jquery", "angular", "bootStrap", "app"], function ($, angular) {
+    angular.element('document').ready(function () {
         angular.bootstrap(document, ["app"]);
     });
 });
