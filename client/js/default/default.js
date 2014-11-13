@@ -141,7 +141,7 @@ define(["angular", "fileUpload", "socketFactory", "scroll"], function (ng) {
                         };
                         req.index = index;
                         scope.$emit("cmtChange", cmt);
-                        scope.added = true;
+                        msg.commentNumber = 0;
                     });
                 };
             }
