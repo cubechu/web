@@ -6,11 +6,11 @@ define(["angular"], function (ng) {
             replace: true,
             templateUrl: '/tpl/smiley.html',
             link: function (scope, element, attrs) {
-                scope.smileyList = smiley[0].content;
+                scope.smileyList = smileys[0].content;
             }
         }
     });
-    var smiley = [
+    var smileys = [
         {
             type: 'default',
             content: [
