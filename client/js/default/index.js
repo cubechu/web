@@ -8,7 +8,8 @@ require.config({
         "io": "/socket.io/socket.io",
         "fileUpload": "/js/component/fileUpload",
         "socketFactory": "/js/component/socketFactory",
-        "scroll": "/js/public/ng-infinite-scroll"
+        "scroll": "/js/public/ng-infinite-scroll",
+        "smiley": "/js/public/smiley"
     },
     shim: {
         "angular": {

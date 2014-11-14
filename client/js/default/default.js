@@ -1,6 +1,6 @@
-define(["angular", "fileUpload", "socketFactory", "scroll"], function (ng) {
+define(["angular", "fileUpload", "socketFactory", "scroll", "smiley"], function (ng) {
 
-    var appModule = ng.module('app', ['fileUploadComponent', 'socketComponent', 'infinite-scroll']);
+    var appModule = ng.module('app', ['fileUploadComponent', 'socketComponent', 'infinite-scroll', 'smiley']);
 
     appModule.controller('wrapCtrl', function ($scope) {
         $scope.$on("msgChange", function (event, msg) {
@@ -23,6 +23,10 @@ define(["angular", "fileUpload", "socketFactory", "scroll"], function (ng) {
     appModule.controller('sendMsgCtrl', function ($scope, $http, socket) {
         $scope.addAttach = function () {//点击上传按钮
             angular.element('#attachBtn').click();
+        };
+        $scope.smiley = false;
+        $scope.showSmiley = function () {
+            $scope.smiley = !$scope.smiley;
         };
         $scope.sendMsg = function () {
             $http({

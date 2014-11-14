@@ -7,7 +7,8 @@ div(class="tab-content")
     div(role="tabpanel", class="tab-pane fade in active", id="msgEditor", ng-controller="sendMsgCtrl")
         textarea(placeholder="有啥新鲜事和同事聊聊", ng-model="sendText")
         div(class="editorCtrl")
-            a(href="", class="pull-left") 表情
+            a(href="", class="pull-left", ng-click="showSmiley()") 表情
+            div(ng-show="smiley", d-smiley="")
             a(href="", class="pull-left", ng-click="addAttach()") 附件
             input(type="button", value="发布", ng-click="sendMsg()")
         div(d-file-upload)
