@@ -1,6 +1,6 @@
-define(["angular", "fileUpload", "socketFactory", "scroll", "smiley"], function (ng) {
+define(["angular", "fileUpload", "socketFactory", "scroll", "smileys"], function (ng) {
 
-    var appModule = ng.module('app', ['fileUploadComponent', 'socketComponent', 'infinite-scroll', 'smiley']);
+    var appModule = ng.module('app', ['fileUploadComponent', 'socketComponent', 'infinite-scroll']);
 
     appModule.controller('wrapCtrl', function ($scope) {
         $scope.$on("msgChange", function (event, msg) {
@@ -28,6 +28,9 @@ define(["angular", "fileUpload", "socketFactory", "scroll", "smiley"], function 
         $scope.showSmiley = function () {
             $scope.smiley = !$scope.smiley;
         };
+        $scope.outputSmiley = function (txt) {
+            $scope.sendText = txt;
+        };
         $scope.sendMsg = function () {
             $http({
                 method: 'post',
@@ -42,6 +45,21 @@ define(["angular", "fileUpload", "socketFactory", "scroll", "smiley"], function 
                 socket.emit('broadcast:msg', req);
             });
         };
+    });
+
+    appModule.directive('dSmiley', function () {
+        return {
+            restrict: 'A',
+            replace: true,
+            templateUrl: '/tpl/smiley.html',
+            link: function (scope, element, attrs) {
+                var smileys = require("smileys");
+                scope.smileyList = smileys[0].content;
+                scope.addSmiley = function (txt) {
+                    scope.outputSmiley(txt);
+                };
+            }
+        }
     });
 
     appModule.controller('msgCtrl', function ($scope, $http, socket) {

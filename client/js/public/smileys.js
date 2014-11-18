@@ -1,15 +1,4 @@
-define(["angular"], function (ng) {
-    var appModule = ng.module('smiley', []);
-    appModule.directive('dSmiley', function () {
-        return {
-            restrict: 'A',
-            replace: true,
-            templateUrl: '/tpl/smiley.html',
-            link: function (scope, element, attrs) {
-                scope.smileyList = smileys[0].content;
-            }
-        }
-    });
+define(function () {
     var smileys = [
         {
             type: 'default',
@@ -115,4 +104,5 @@ define(["angular"], function (ng) {
             ]
         }
     ];
+    return smileys;
 });

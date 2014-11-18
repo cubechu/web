@@ -1,6 +1,6 @@
 <div>
     <ul class="smiley">
-        <li ng-repeat="s in smileyList">
+        <li ng-repeat="s in smileyList" ng-click="addSmiley(s[0])">
             <img ng-src="../../img/smiley/{{s[1]}}" title="{{s[0]}}" alt="{{s[0]}}">
         </li>
     </ul>

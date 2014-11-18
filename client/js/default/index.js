@@ -9,7 +9,7 @@ require.config({
         "fileUpload": "/js/component/fileUpload",
         "socketFactory": "/js/component/socketFactory",
         "scroll": "/js/public/ng-infinite-scroll",
-        "smiley": "/js/public/smiley"
+        "smileys": "/js/public/smileys"
     },
     shim: {
         "angular": {
