@@ -28,8 +28,33 @@ define(["angular", "fileUpload", "socketFactory", "scroll", "smileys"], function
         $scope.showSmiley = function () {
             $scope.smiley = !$scope.smiley;
         };
+
+        function insertText(obj, str) {
+            if (document.selection) {
+                obj.focus();
+                sel = document.selection.createRange();
+                sel.text = str;
+                sel.select();
+            }
+            else if (obj.selectionStart || obj.selectionStart == '0') {
+                var startPos = obj.selectionStart,
+                    endPos = obj.selectionEnd,
+                    restoreTop = obj.scrollTop;
+                obj.focus();
+                obj.value = obj.value.substring(0, startPos) + str + obj.value.substring(endPos, obj.value.length);
+                if (restoreTop > 0) {
+                    obj.scrollTop = restoreTop;
+                }
+                startPos += str.length;
+                obj.selectionStart = obj.selectionEnd = startPos;
+            } else {
+                obj.value += str;
+                obj.focus();
+            }
+        }
+
         $scope.outputSmiley = function (txt) {
-            $scope.sendText = txt;
+            insertText(document.getElementById('editor'), '[' + txt + ']');
         };
         $scope.sendMsg = function () {
             $http({
