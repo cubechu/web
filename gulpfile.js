@@ -15,10 +15,17 @@ gulp.task('styles', function () {
         .pipe(gulp.dest('client/css/'));
 });
 
+gulp.task('scripts', function() {
+  return gulp.src('client/js/default/index.js')
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(uglify({mangle: false}))
+    .pipe(gulp.dest('client/js/default/'));
+});
+
 gulp.task('clean', function(cb) {
-    del(['client/css/main.css', 'client/css/main.min.css'], cb);
+    del(['client/css/main.css', 'client/css/main.min.css', 'client/js/default/index.min.js'], cb);
 });
 
 gulp.task('default', ['clean'], function() {
-    gulp.start('styles');
+    gulp.start('styles', 'scripts');
 });
