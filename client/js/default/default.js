@@ -1,10 +1,10 @@
-window.jQuery = require("../public/jquery.min");
-require("../public/angular.min");
-require("../public/bootstrap.min");
+window.jQuery = require("../lib/public/jquery.min");
+require("../lib/public/angular.min");
+require("../lib/public/bootstrap.min");
 require("../component/fileUpload");
 //require("../component/socketFactory");
-require("../public/ng-infinite-scroll");
-var smileys = require("../public/smileys");
+require("../lib/plugin/ng-infinite-scroll.min");
+var smileys = require("../component/smileys");
 
 var mod = angular.module('app', ['fileUploadComponent', /* 'socketComponent', */'infinite-scroll']);
 

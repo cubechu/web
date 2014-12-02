@@ -1,4 +1,4 @@
-require("../public/angular-file-upload.min");
+require("../lib/plugin/angular-file-upload.min");
 
 var mod = angular.module('fileUploadComponent', ['angularFileUpload']);
 
