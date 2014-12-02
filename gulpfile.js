@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
+    livereload = require('gulp-livereload'),
     del = require('del');
 
 gulp.task('styles', function () {
@@ -28,4 +29,11 @@ gulp.task('clean', function(cb) {
 
 gulp.task('default', ['clean'], function() {
     gulp.start('styles', 'scripts');
+});
+
+gulp.task('watch', function() {
+  gulp.watch('client/css/*.css', ['styles']);
+  gulp.watch('client/js/default/index.js', ['scripts']);
+  livereload.listen();
+  gulp.watch(['client/**']).on('change', livereload.changed);
 });
