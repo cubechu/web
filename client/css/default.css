@@ -117,6 +117,11 @@ li.cmt a.avatar img {
     margin-bottom: 15px;
 }
 
+.smiley-wrap {
+    width: 322px;
+    padding: 10px;
+}
+
 .smiley li {
     display: inline-block;
     width: 30px;

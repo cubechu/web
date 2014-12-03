@@ -27,9 +27,8 @@ mod.controller('sendMsgCtrl', function ($scope, $http, socket) {
     $scope.addAttach = function () {//点击上传按钮
         angular.element('#attachBtn').click();
     };
-    $scope.smiley = false;
     $scope.showSmiley = function () {
-        $scope.smiley = !$scope.smiley;
+        $scope.smileyList = smileys[0].content;
     };
 
     function insertText(obj, str) {
@@ -81,7 +80,6 @@ mod.directive('dSmiley', function () {
         replace: true,
         templateUrl: '/tpl/smiley.html',
         link: function (scope, element, attrs) {
-            scope.smileyList = smileys[0].content;
             scope.addSmiley = function (txt) {
                 scope.outputSmiley(txt);
             };
