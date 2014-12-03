@@ -1,6 +1,3 @@
-window.jQuery = require("../lib/public/jquery.min");
-require("../lib/public/angular.min");
-require("../lib/public/bootstrap.min");
 require("../component/fileUpload");
 //require("../component/socketFactory");
 require("../lib/plugin/ng-infinite-scroll.min");
