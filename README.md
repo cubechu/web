@@ -1,5 +1,5 @@
 <pre>
-node.js + mongoose + angular.js + require.js + bootstrap
+node.js + mongoose + angular.js + browserify + bootstrap + gulp
 
 menus and files:
 

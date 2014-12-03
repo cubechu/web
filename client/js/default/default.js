@@ -1,9 +1,9 @@
 require("../component/fileUpload");
-//require("../component/socketFactory");
+require("../component/socketFactory");
 require("../lib/plugin/ng-infinite-scroll.min");
 var smileys = require("../component/smileys");
 
-var mod = angular.module('app', ['fileUploadComponent', /* 'socketComponent', */'infinite-scroll']);
+var mod = angular.module('app', ['fileUploadComponent', 'socketComponent', 'infinite-scroll']);
 
 mod.controller('wrapCtrl', function ($scope) {
     $scope.$on("msgChange", function (event, msg) {
@@ -23,7 +23,7 @@ mod.directive('dShowTab', function () {
 });
 
 //发送消息
-mod.controller('sendMsgCtrl', function ($scope, $http/*, socket*/) {
+mod.controller('sendMsgCtrl', function ($scope, $http, socket) {
     $scope.addAttach = function () {//点击上传按钮
         angular.element('#attachBtn').click();
     };
@@ -70,7 +70,7 @@ mod.controller('sendMsgCtrl', function ($scope, $http/*, socket*/) {
         }).success(function (req) {
             $scope.sendText = '';
             $scope.$emit("msgChange", req);
-            /*socket.emit('broadcast:msg', req);*/
+            socket.emit('broadcast:msg', req);
         });
     };
 });
@@ -89,12 +89,12 @@ mod.directive('dSmiley', function () {
     }
 });
 
-mod.controller('msgCtrl', function ($scope, $http/*, socket*/) {
+mod.controller('msgCtrl', function ($scope, $http, socket) {
     $scope.hasNew = true;
     //新消息处理
-    /*socket.on('new:msg', function (msg) {
-     $scope.hasNew = false;
-     });*/
+    socket.on('new:msg', function (msg) {
+        $scope.hasNew = false;
+    });
     //最新微博
     $scope.getLatestMsg = function () {
         $scope.hasNew = true;

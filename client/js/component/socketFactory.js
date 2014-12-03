@@ -1,4 +1,3 @@
-require("socket.io");
 var mod = angular.module('socketComponent', []);
 
 mod.factory('socket', function ($rootScope) {
