@@ -1,9 +1,11 @@
 require("../component/fileUpload");
-require("../component/socketFactory");
+require("../component/factory");
+require("../component/filter");
 require("../lib/plugin/ng-infinite-scroll.min");
+var utils = require("../lib/public/utils");
 var smileys = require("../component/smileys");
 
-var mod = angular.module('app', ['fileUploadComponent', 'socketComponent', 'infinite-scroll']);
+var mod = angular.module('app', ['fileUploadComponent', 'factory', 'filter', 'infinite-scroll']);
 
 mod.controller('wrapCtrl', function ($scope) {
     $scope.$on("msgChange", function (event, msg) {
@@ -31,34 +33,11 @@ mod.controller('sendMsgCtrl', function ($scope, $http, socket) {
         $scope.smileyList = smileys[0].content;
     };
 
-    function insertText(obj, str) {
-        if (document.selection) {
-            obj.focus();
-            sel = document.selection.createRange();
-            sel.text = str;
-            sel.select();
-        }
-        else if (obj.selectionStart || obj.selectionStart == '0') {
-            var startPos = obj.selectionStart,
-                endPos = obj.selectionEnd,
-                restoreTop = obj.scrollTop;
-            obj.focus();
-            obj.value = obj.value.substring(0, startPos) + str + obj.value.substring(endPos, obj.value.length);
-            if (restoreTop > 0) {
-                obj.scrollTop = restoreTop;
-            }
-            startPos += str.length;
-            obj.selectionStart = obj.selectionEnd = startPos;
-        } else {
-            obj.value += str;
-            obj.focus();
-        }
-    }
-
     $scope.outputSmiley = function (txt) {
-        insertText(document.getElementById('editor'), '[' + txt + ']');
+        utils.string.insertText(document.getElementById('editor'), '[' + txt + ']');
     };
     $scope.sendMsg = function () {
+        $scope.sendText = document.getElementById('editor').value;
         $http({
             method: 'post',
             url: '/sendMsg',
@@ -140,6 +119,41 @@ mod.controller('msgCtrl', function ($scope, $http, socket) {
             }
             page++;
         });
+    };
+});
+
+//msg content
+
+mod.directive('dMsgContent', function () {
+    var smileyHashMap = {};
+    return {
+        restrict: 'EA',
+        replace: true,
+        require: '^ngModel',
+        scope: {
+            ngModel: '='
+        },
+        template: '<p ng-bind-html="ngModel | to_trusted""></p>',
+        link: function (scope, element, attrs) {
+            var str = scope.ngModel;
+            var reg = utils.reg.link;
+            str = str.replace(reg, '<a target=\"_blank\" href=\" $& \">$&</a>');   //将链接文本自动解析为URL
+            str = str.replace(/\[([^\[\]]+)\]/g, function (all, text) {
+                var pkg = smileys[0].content;
+                if (smileyHashMap[text]) {
+                    return scope.ngModel = smileyHashMap[text];
+                }
+                for (var j = 0, jj = pkg.length; j < jj; j++) {
+                    var pkgItem = pkg[j];
+                    if (text === pkgItem[0]) {
+                        return scope.ngModel = (smileyHashMap[text] = '<img src="../../img/smiley/' + pkgItem[1] + '" title="' + pkgItem[0].replace('xl:', '') + ' "alt="[' + pkgItem[0] + ']" />');
+                    }
+                }
+
+                return scope.ngModel = all;
+            });
+            return scope.ngModel = str;
+        }
     };
 });
 

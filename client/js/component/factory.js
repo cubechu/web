@@ -1,4 +1,4 @@
-var mod = angular.module('socketComponent', []);
+var mod = angular.module('factory', []);
 
 mod.factory('socket', function ($rootScope) {
     var socket = io.connect('http://localhost:3006');
