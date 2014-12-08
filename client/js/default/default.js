@@ -122,41 +122,6 @@ mod.controller('msgCtrl', function ($scope, $http, socket) {
     };
 });
 
-//msg content
-
-mod.directive('dMsgContent', function () {
-    var smileyHashMap = {};
-    return {
-        restrict: 'EA',
-        replace: true,
-        require: '^ngModel',
-        scope: {
-            ngModel: '='
-        },
-        template: '<p ng-bind-html="ngModel | to_trusted""></p>',
-        link: function (scope, element, attrs) {
-            var str = scope.ngModel;
-            var reg = utils.reg.link;
-            str = str.replace(reg, '<a target=\"_blank\" href=\" $& \">$&</a>');   //将链接文本自动解析为URL
-            str = str.replace(/\[([^\[\]]+)\]/g, function (all, text) {
-                var pkg = smileys[0].content;
-                if (smileyHashMap[text]) {
-                    return scope.ngModel = smileyHashMap[text];
-                }
-                for (var j = 0, jj = pkg.length; j < jj; j++) {
-                    var pkgItem = pkg[j];
-                    if (text === pkgItem[0]) {
-                        return scope.ngModel = (smileyHashMap[text] = '<img src="../../img/smiley/' + pkgItem[1] + '" title="' + pkgItem[0].replace('xl:', '') + ' "alt="[' + pkgItem[0] + ']" />');
-                    }
-                }
-
-                return scope.ngModel = all;
-            });
-            return scope.ngModel = str;
-        }
-    };
-});
-
 //回复
 mod.directive('dCmt', function ($http) {
     return {
