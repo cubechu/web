@@ -53,6 +53,7 @@ mod.controller('sendMsgCtrl', function ($scope, $http, socket) {
     };
 });
 
+//表情
 mod.directive('dSmiley', function () {
     return {
         restrict: 'A',

@@ -5,6 +5,7 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
     livereload = require('gulp-livereload'),
+    browserify = require('gulp-browserify'),
     del = require('del');
 
 gulp.task('styles', function () {
@@ -16,24 +17,28 @@ gulp.task('styles', function () {
         .pipe(gulp.dest('client/css/'));
 });
 
-gulp.task('scripts', function() {
-  return gulp.src('client/js/default/index.js')
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(uglify({mangle: false}))
-    .pipe(gulp.dest('client/js/default/'));
+gulp.task('browserify', function () {
+    gulp.src(['client/js/default/default.js'])
+        .pipe(browserify({
+            insertGlobals: false,
+            debug: false
+        }))
+        .pipe(rename({ suffix: '.min' }))
+        //.pipe(uglify({mangle: false}))
+        .pipe(gulp.dest('client/js/default/'))
 });
 
-gulp.task('clean', function(cb) {
-    del(['client/css/main.css', 'client/css/main.min.css', 'client/js/default/index.min.js'], cb);
+gulp.task('clean', function (cb) {
+    del(['client/css/main.css', 'client/css/main.min.css', 'client/js/default/default.min.js'], cb);
 });
 
-gulp.task('default', ['clean'], function() {
-    gulp.start('styles', 'scripts');
+gulp.task('default', ['clean'], function () {
+    gulp.start('styles', 'browserify');
 });
 
-gulp.task('watch', function() {
-  gulp.watch('client/css/*.css', ['styles']);
-  gulp.watch('client/js/default/index.js', ['scripts']);
-  livereload.listen();
-  gulp.watch(['client/**']).on('change', livereload.changed);
+gulp.task('watch', function () {
+    gulp.watch('client/css/*.css', ['styles']);
+    gulp.watch('client/js/**/*.js', ['browserify']);
+    livereload.listen();
+    gulp.watch(['client/**']).on('change', livereload.changed);
 });

@@ -116,10 +116,12 @@ li.cmt a.avatar img {
 .pub-box .nav-tabs {
     margin-bottom: 15px;
 }
-.smiley-wrap{
+
+.smiley-wrap {
     width: 322px;
     padding: 10px;
 }
+
 .smiley li {
     display: inline-block;
     width: 30px;
