@@ -24,7 +24,7 @@ gulp.task('browserify', function () {
             debug: false
         }))
         .pipe(rename({ suffix: '.min' }))
-        //.pipe(uglify({mangle: false}))
+        .pipe(uglify({mangle: false}))
         .pipe(gulp.dest('client/js/default/'))
 });
 
