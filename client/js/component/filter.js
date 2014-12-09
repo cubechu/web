@@ -1,5 +1,5 @@
-var utils = require("../lib/public/utils");
-var smileys = require("../component/smileys");
+var utils = require('../lib/public/utils');
+var smileys = require('../component/smileys');
 var mod = angular.module('filter', []);
 
 mod.filter('f_msgContent', ['$sce', function ($sce) {

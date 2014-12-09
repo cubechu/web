@@ -1,15 +1,15 @@
-require("../component/fileUpload");
-require("../component/factory");
-require("../component/filter");
-require("../lib/plugin/ng-infinite-scroll.min");
-var utils = require("../lib/public/utils");
-var smileys = require("../component/smileys");
+require('../component/fileUpload');
+require('../component/factory');
+require('../component/filter');
+require('../lib/plugin/ng-infinite-scroll.min');
+var utils = require('../lib/public/utils');
+var smileys = require('../component/smileys');
 
 var mod = angular.module('app', ['fileUploadComponent', 'factory', 'filter', 'infinite-scroll']);
 
 mod.controller('wrapCtrl', function ($scope) {
-    $scope.$on("msgChange", function (event, msg) {
-        $scope.$broadcast("changeFromParent", msg);
+    $scope.$on('msgChange', function (event, msg) {
+        $scope.$broadcast('changeFromParent', msg);
     });
 });
 
@@ -47,7 +47,7 @@ mod.controller('sendMsgCtrl', function ($scope, $http, socket) {
             }
         }).success(function (req) {
             $scope.sendText = '';
-            $scope.$emit("msgChange", req);
+            $scope.$emit('msgChange', req);
             socket.emit('broadcast:msg', req);
         });
     };
@@ -84,10 +84,10 @@ mod.controller('msgCtrl', function ($scope, $http, socket) {
             }
         });
     };
-    $scope.$on("changeFromParent", function (event, msg) {
+    $scope.$on('changeFromParent', function (event, msg) {
         $scope.msgList.unshift(msg.microblog);
     });
-    $scope.$on("cmtChange", function (event, cmt) {
+    $scope.$on('cmtChange', function (event, cmt) {
         var comments = $scope.msgList[cmt.index].comments;
         if (comments) {
             $scope.msgList[cmt.index].comments = cmt.isAdd ? comments.concat(cmt.content) : cmt.content.reverse().concat(comments);
@@ -148,7 +148,7 @@ mod.directive('dCmt', function ($http) {
                         content: [req],
                         isAdd: true
                     };
-                    scope.$emit("cmtChange", cmt);
+                    scope.$emit('cmtChange', cmt);
                 });
             };
             scope.showComment = function (msg, index) {
@@ -166,7 +166,7 @@ mod.directive('dCmt', function ($http) {
                         content: req
                     };
                     req.index = index;
-                    scope.$emit("cmtChange", cmt);
+                    scope.$emit('cmtChange', cmt);
                     msg.commentNumber = 0;
                 });
             };
