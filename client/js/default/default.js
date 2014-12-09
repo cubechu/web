@@ -7,6 +7,10 @@ var smileys = require('../component/smileys');
 
 var mod = angular.module('app', ['fileUploadComponent', 'factory', 'filter', 'infinite-scroll']);
 
+angular.element(document).ready(function readyHandler() {
+    angular.bootstrap(document, ['app']);
+});
+
 mod.controller('wrapCtrl', function ($scope) {
     $scope.$on('msgChange', function (event, msg) {
         $scope.$broadcast('changeFromParent', msg);
