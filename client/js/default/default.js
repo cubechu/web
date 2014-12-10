@@ -57,15 +57,36 @@ mod.controller('sendMsgCtrl', function ($scope, $http, socket) {
     };
 });
 
+//后续用指令代替表情的操作
+/*mod.directive('dMsgEditor', function () {
+    return {
+        restrict: 'A',
+        scope: {},
+        controller: function ($scope, $element, $attrs) {
+            this.add = function(s){
+                $scope.str = s;
+                console.log($scope.str);
+                console.log($element);
+                utils.string.insertText($element, '[' + $scope.str + ']');
+            };
+        },
+        link: function(scope, element, attrs){
+            utils.string.insertText(element, '[' + scope.str + ']');
+        }
+    };
+});*/
+
 //表情
 mod.directive('dSmiley', function () {
     return {
         restrict: 'A',
         replace: true,
+        require: '^dMsgEditor',
         templateUrl: '/tpl/smiley.html',
-        link: function (scope, element, attrs) {
+        link: function (scope, element, attrs/*, msgEditor*/) {
             scope.addSmiley = function (txt) {
                 scope.outputSmiley(txt);
+                //msgEditor.add(txt);
             };
         }
     }

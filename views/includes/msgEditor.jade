@@ -5,11 +5,11 @@ ul(class="nav nav-tabs", role="tablist")
         a(d-show-tab="", href="#docEditor", role="tab", data-toggle="tab") 文档
 div(class="tab-content")
     div(role="tabpanel", class="tab-pane fade in active", id="msgEditor", ng-controller="sendMsgCtrl")
-        textarea(placeholder="有啥新鲜事和同事聊聊", ng-model="sendText", id="editor")
+        textarea(placeholder="有啥新鲜事和同事聊聊", ng-model="sendText", id="editor", d-msg-editor)
         div(class="editorCtrl")
             div(class="pull-left dropdown")
                 a(href="", class="dropdown-toggle", data-toggle="dropdown", ng-click="showSmiley()") 表情
-                div(class="dropdown-menu smiley-wrap", d-smiley="")
+                div(class="dropdown-menu smiley-wrap", d-msg-editor, d-smiley="")
             a(href="", class="pull-left", ng-click="addAttach()") 附件
             input(type="button", value="发布", ng-click="sendMsg()")
         div(d-file-upload)
